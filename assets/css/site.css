@@ -54,10 +54,9 @@ button { font-family: inherit; }
   box-shadow: 0 1px 0 var(--border);
   padding: 12px 32px;
 }
-.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-logo svg { height: 26px; width: auto; flex-shrink: 0; }
-.nav-logo-text { color: var(--white); transition: color .25s; }
-.site-nav.solid .nav-logo-text { color: var(--ink); }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); transition: color .25s; }
+.nav-logo svg { height: 24px; width: auto; flex-shrink: 0; }
+.site-nav.solid .nav-logo { color: var(--ink); }
 
 .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
 .nav-links a {
