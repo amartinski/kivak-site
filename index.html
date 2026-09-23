@@ -3,1113 +3,200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KIVAK — O app que nasceu nas trilhas</title>
+  <title>KIVAK — O mapa acaba onde a sua perna começa</title>
+  <meta name="description" content="KIVAK é a rede social de trilha, camping e aventura feita no Brasil, pra trilha brasileira. Grave suas trilhas com GPS de verdade, descubra campings avaliados por quem esteve lá e organize saídas com comunidades de verdade." />
   <link rel="icon" href="assets/images/favicon.png" />
-  <link rel="stylesheet" href="assets/web/leaflet.min.css" />
-  <link rel="stylesheet" href="assets/web/markercluster.css" />
-  <link rel="stylesheet" href="assets/web/markercluster.default.css" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --green:      #1D9E75;
-      --green-dark: #155c43;
-      --green-mid:  #178a63;
-      --green-light:#e8f5ef;
-      --black:      #111;
-      --dark:       #1a1a1a;
-      --gray:       #f7f7f7;
-      --text:       #333;
-      --muted:      #777;
-      --white:      #fff;
-      --radius:     16px;
-    }
-
-    html { scroll-behavior: smooth; }
-    body  { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
-
-    /* ─── NAV ───────────────────────────────────────────────────── */
-    nav {
-      position: sticky; top: 0; z-index: 999;
-      background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid #eee;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 64px;
-    }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo svg { height: 32px; width: auto; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; font-size: .9rem; transition: color .2s; }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta {
-      background: var(--green); color: var(--white); border: none; border-radius: 24px;
-      padding: 10px 22px; font-size: .9rem; font-weight: 600; cursor: pointer; text-decoration: none;
-      transition: background .2s, transform .15s;
-    }
-    .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
-
-    /* ─── HERO ──────────────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0d2b1f 0%, #1a3d2b 40%, #0f251a 100%);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden; padding: 80px 40px 60px;
-    }
-    .hero-particles {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(29,158,117,.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(29,158,117,.10) 0%, transparent 50%);
-    }
-    .hero-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-      align-items: center; max-width: 1100px; width: 100%; position: relative; z-index: 1;
-    }
-    .hero-text h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800;
-      line-height: 1.1; color: var(--white); margin-bottom: 16px;
-    }
-    .hero-text h1 span { color: var(--green); }
-    .hero-tagline {
-      font-size: 1.1rem; color: rgba(255,255,255,.65); line-height: 1.7;
-      margin-bottom: 36px; max-width: 480px;
-    }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn-primary {
-      background: var(--green); color: var(--white); border: none; border-radius: 28px;
-      padding: 14px 28px; font-size: .95rem; font-weight: 700; cursor: pointer; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 8px;
-      box-shadow: 0 8px 24px rgba(29,158,117,.4); transition: transform .2s, box-shadow .2s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(29,158,117,.5); }
-    .btn-outline {
-      background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.3);
-      border-radius: 28px; padding: 13px 26px; font-size: .95rem; font-weight: 600;
-      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-      transition: border-color .2s, background .2s;
-    }
-    .btn-outline:hover { border-color: var(--green); background: rgba(29,158,117,.1); }
-    .hero-phone-wrap {
-      display: flex; justify-content: center; align-items: center;
-      position: relative;
-    }
-    .hero-phone-wrap::before {
-      content: ''; position: absolute;
-      width: 320px; height: 320px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(29,158,117,.25) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      animation: pulse 3s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6} 50%{transform:translate(-50%,-50%) scale(1.15);opacity:1} }
-
-    /* ─── PHONE FRAME ───────────────────────────────────────────── */
-    .phone {
-      width: 260px; min-width: 260px; height: 520px;
-      background: #111; border-radius: 40px; border: 6px solid #2a2a2a;
-      box-shadow: 0 40px 80px rgba(0,0,0,.6), inset 0 0 0 1px #333;
-      overflow: hidden; position: relative; flex-shrink: 0;
-    }
-    .phone.small { width: 220px; min-width: 220px; height: 440px; border-radius: 32px; }
-    .phone-notch {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 100px; height: 26px; background: #111; border-radius: 0 0 16px 16px; z-index: 10;
-    }
-    .phone-screen { width: 100%; height: 100%; background: #fff; overflow: hidden; }
-
-    /* ─── APP SCREEN STYLES ─────────────────────────────────────── */
-    .app-screen { width: 100%; height: 100%; display: flex; flex-direction: column; }
-    .app-header {
-      padding: 36px 16px 10px; background: var(--white);
-      border-bottom: 1px solid #f0f0f0; flex-shrink: 0;
-    }
-    .app-header-row { display: flex; align-items: center; justify-content: space-between; }
-    .app-title { font-size: .8rem; font-weight: 700; color: var(--green); }
-    .app-icon-row { display: flex; gap: 10px; }
-    .app-icon { width: 20px; height: 20px; background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .65rem; }
-    .app-content { flex: 1; overflow: hidden; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
-    .app-tabbar {
-      display: flex; background: var(--white); border-top: 1px solid #eee;
-      padding: 6px 0 10px; flex-shrink: 0;
-    }
-    .app-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: .48rem; color: #999; cursor: pointer; }
-    .app-tab.active { color: var(--green); }
-    .app-tab-icon { font-size: .85rem; }
-    .app-tab-plus {
-      flex: 1; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 6px;
-    }
-    .plus-btn {
-      width: 38px; height: 38px; background: var(--green); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; color: white;
-      font-size: 1.2rem; box-shadow: 0 4px 12px rgba(29,158,117,.5); margin-bottom: 4px;
-    }
-
-    /* Feed screen */
-    .story-row { display: flex; gap: 8px; overflow: hidden; flex-shrink: 0; margin-bottom: 2px; }
-    .story { display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; }
-    .story-avatar {
-      width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--green);
-      background: var(--green-light); display: flex; align-items: center; justify-content: center;
-      font-size: .9rem;
-    }
-    .story-name { font-size: .38rem; color: var(--muted); white-space: nowrap; }
-    .post-card { background: white; border-radius: 10px; border: 1px solid #f0f0f0; overflow: hidden; }
-    .post-header { display: flex; align-items: center; gap: 6px; padding: 6px 8px; }
-    .post-avatar { width: 22px; height: 22px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: .65rem; }
-    .post-user-info .post-user { font-size: .5rem; font-weight: 700; }
-    .post-user-info .post-loc { font-size: .4rem; color: var(--muted); }
-    .post-img {
-      height: 80px;
-      background: linear-gradient(160deg, #2d6a4f, #52b788, #95d5b2);
-      display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;
-    }
-    .post-img.img2 { background: linear-gradient(160deg, #1b4332, #40916c, #74c69d); }
-    .post-img.img3 { background: linear-gradient(160deg, #081c15, #1b4332, #2d6a4f); }
-    .post-actions { display: flex; gap: 8px; padding: 5px 8px; }
-    .post-action { font-size: .45rem; color: var(--muted); display: flex; align-items: center; gap: 2px; }
-    .post-action.liked { color: #e63946; }
-    .post-caption { font-size: .42rem; color: var(--text); padding: 0 8px 6px; line-height: 1.4; }
-
-    /* Campings screen */
-    .camp-search {
-      background: #f5f5f5; border-radius: 20px; padding: 6px 10px;
-      font-size: .55rem; color: var(--muted); display: flex; align-items: center; gap: 4px;
-      margin-bottom: 6px;
-    }
-    .camp-card {
-      border-radius: 10px; overflow: hidden; border: 1px solid #f0f0f0; flex-shrink: 0;
-    }
-    .camp-card-img {
-      height: 60px;
-      display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;
-    }
-    .camp-card-img.c1 { background: linear-gradient(135deg, #2d6a4f, #95d5b2); }
-    .camp-card-img.c2 { background: linear-gradient(135deg, #1b4332, #52b788); }
-    .camp-card-img.c3 { background: linear-gradient(135deg, #0a3622, #40916c); }
-    .camp-card-body { padding: 5px 8px; }
-    .camp-name { font-size: .52rem; font-weight: 700; }
-    .camp-loc { font-size: .42rem; color: var(--muted); }
-    .camp-stars { font-size: .45rem; color: #f4a261; }
-
-    /* Profile screen */
-    .profile-header { padding: 36px 16px 12px; background: var(--white); text-align: center; border-bottom: 1px solid #f0f0f0; }
-    .profile-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--green); margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; border: 3px solid var(--green-light); }
-    .profile-name { font-size: .7rem; font-weight: 700; }
-    .profile-user { font-size: .5rem; color: var(--green); }
-    .profile-stats { display: flex; justify-content: center; gap: 16px; margin-top: 8px; }
-    .profile-stat { text-align: center; }
-    .profile-stat-n { font-size: .65rem; font-weight: 800; }
-    .profile-stat-l { font-size: .38rem; color: var(--muted); }
-    .badges-section { padding: 10px 12px; }
-    .badges-title { font-size: .52rem; font-weight: 700; margin-bottom: 6px; }
-    .badges-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .badge {
-      border-radius: 8px; padding: 5px 3px; display: flex; flex-direction: column;
-      align-items: center; gap: 2px; border: 1px solid #eee;
-      background: linear-gradient(135deg, #f0faf5, #e8f5ef);
-    }
-    .badge-icon { font-size: .9rem; }
-    .badge-name { font-size: .3rem; color: var(--muted); text-align: center; }
-
-    /* ─── SECTION BASE ──────────────────────────────────────────── */
-    section { padding: 80px 40px; }
-    .section-label { font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
-    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--black); line-height: 1.2; margin-bottom: 16px; }
-    .section-sub { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 560px; }
-    .container { max-width: 1100px; margin: 0 auto; }
-
-    /* ─── FEATURES ──────────────────────────────────────────────── */
-    #features { background: var(--gray); }
-    .features-header { text-align: center; margin-bottom: 56px; }
-    .features-header .section-sub { margin: 0 auto; }
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .feature-card {
-      background: var(--white); border-radius: var(--radius); padding: 28px;
-      border: 1px solid #eee; transition: transform .2s, box-shadow .2s;
-    }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
-    .feature-icon {
-      width: 48px; height: 48px; background: var(--green-light); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
-      margin-bottom: 16px;
-    }
-    .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .feature-text { font-size: .88rem; color: var(--muted); line-height: 1.6; }
-
-    /* ─── APP SCREENS ───────────────────────────────────────────── */
-    #mockups {
-      background: linear-gradient(160deg, #0d2b1f 0%, #1a3d2b 100%);
-      padding: 80px 40px;
-    }
-    .mockups-header { text-align: center; margin-bottom: 60px; }
-    .mockups-header .section-title { color: var(--white); }
-    .mockups-header .section-label { color: var(--green); }
-    .mockups-header .section-sub { color: rgba(255,255,255,.6); margin: 0 auto; }
-    .phones-row {
-      display: flex; justify-content: center; align-items: flex-end;
-      gap: 24px; flex-wrap: wrap;
-    }
-    .phone-label { text-align: center; color: rgba(255,255,255,.5); font-size: .75rem; margin-top: 12px; }
-
-    /* ─── MAP ───────────────────────────────────────────────────── */
-    #mapa { padding: 0; }
-    .map-header { padding: 64px 40px 40px; background: var(--white); }
-    #leaflet-map { height: 520px; width: 100%; }
-
-    /* ─── STATS ─────────────────────────────────────────────────── */
-    #stats { background: var(--green); padding: 64px 40px; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 900px; margin: 0 auto; text-align: center; }
-    .stat-item {}
-    .stat-num { font-size: 2.8rem; font-weight: 900; color: var(--white); line-height: 1; }
-    .stat-label { font-size: .85rem; color: rgba(255,255,255,.75); margin-top: 6px; }
-
-    /* ─── HOW IT WORKS ──────────────────────────────────────────── */
-    #como { background: var(--gray); }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
-    .step { text-align: center; }
-    .step-num {
-      width: 56px; height: 56px; background: var(--green); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-      font-weight: 900; color: white; margin: 0 auto 16px;
-    }
-    .step-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .step-text { font-size: .88rem; color: var(--muted); line-height: 1.6; }
-
-    /* ─── INVESTIDORES ──────────────────────────────────────────── */
-    #investidores { background: var(--white); }
-    .invest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 48px; }
-    .invest-left h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
-    .invest-left p { font-size: .9rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-    .market-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .pill {
-      background: var(--green-light); color: var(--green-dark); border-radius: 20px;
-      padding: 6px 14px; font-size: .78rem; font-weight: 600;
-    }
-    .revenue-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .revenue-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 14px; background: var(--gray); border-radius: 10px;
-      font-size: .85rem;
-    }
-    .revenue-item-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-    .revenue-item-text strong { display: block; font-weight: 700; font-size: .88rem; margin-bottom: 2px; }
-    .revenue-item-text span { color: var(--muted); font-size: .8rem; }
-    .invest-right { position: sticky; top: 80px; }
-    .contact-card {
-      background: linear-gradient(135deg, #0d2b1f, #1a3d2b);
-      border-radius: 20px; padding: 36px; color: white;
-    }
-    .contact-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; }
-    .contact-card p { color: rgba(255,255,255,.65); font-size: .88rem; line-height: 1.6; margin-bottom: 24px; }
-    .contact-form { display: flex; flex-direction: column; gap: 12px; }
-    .contact-form input, .contact-form textarea, .contact-form select {
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
-      border-radius: 10px; padding: 12px 14px; color: white; font-size: .88rem;
-      outline: none; resize: none; font-family: inherit; transition: border-color .2s;
-    }
-    .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,.4); }
-    .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--green); }
-    .contact-form select option { background: #1a2e22; color: white; }
-    .contact-form button {
-      background: var(--green); border: none; border-radius: 10px;
-      padding: 14px; color: white; font-weight: 700; font-size: .9rem; cursor: pointer;
-      transition: background .2s, transform .15s;
-    }
-    .contact-form button:hover { background: var(--green-dark); transform: translateY(-1px); }
-    .trust-badges { display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap; }
-    .trust-badge {
-      display: flex; align-items: center; gap: 6px;
-      font-size: .75rem; color: rgba(255,255,255,.6);
-    }
-    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-    .metric-box {
-      background: rgba(255,255,255,.06); border-radius: 10px; padding: 14px;
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .metric-n { font-size: 1.4rem; font-weight: 800; color: var(--green); }
-    .metric-l { font-size: .72rem; color: rgba(255,255,255,.55); margin-top: 2px; }
-
-    /* ─── PARCEIROS ─────────────────────────────────────────────── */
-    #parceiros { background: var(--gray); text-align: center; }
-    .parceiros-sub { font-size: .9rem; color: var(--muted); margin: 0 auto 40px; max-width: 520px; }
-    .partner-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .partner-type {
-      background: var(--white); border-radius: var(--radius); padding: 28px;
-      border: 1px solid #eee; text-align: left; transition: transform .2s, box-shadow .2s;
-    }
-    .partner-type:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.07); }
-    .partner-type-icon { font-size: 2rem; margin-bottom: 14px; }
-    .partner-type h4 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; }
-    .partner-type p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
-
-    /* ─── DEPOIMENTOS ───────────────────────────────────────────── */
-    #depoimentos { background: var(--white); }
-    .depo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-    .depo-card { background: var(--gray); border-radius: var(--radius); padding: 24px; }
-    .depo-stars { color: #f4a261; font-size: .9rem; margin-bottom: 12px; }
-    .depo-text { font-size: .88rem; color: var(--text); line-height: 1.65; margin-bottom: 16px; font-style: italic; }
-    .depo-author { display: flex; align-items: center; gap: 10px; }
-    .depo-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-size: .9rem; color: white; }
-    .depo-name { font-size: .82rem; font-weight: 700; }
-    .depo-role { font-size: .72rem; color: var(--muted); }
-
-    /* ─── FOOTER ────────────────────────────────────────────────── */
-    footer {
-      background: var(--dark); color: rgba(255,255,255,.7);
-      padding: 56px 40px 28px;
-    }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-    .footer-brand p { font-size: .85rem; line-height: 1.7; color: rgba(255,255,255,.5); margin-top: 12px; max-width: 260px; }
-    .footer-col h5 { font-size: .85rem; font-weight: 700; color: var(--white); margin-bottom: 14px; }
-    .footer-col a { display: block; font-size: .82rem; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 8px; transition: color .2s; }
-    .footer-col a:hover { color: var(--green); }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: .78rem; color: rgba(255,255,255,.35);
-    }
-    .footer-bottom a { color: var(--green); text-decoration: none; }
-
-    /* ─── ANIMATIONS ────────────────────────────────────────────── */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* ─── RESPONSIVE ────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .hero-grid, .invest-grid { grid-template-columns: 1fr; }
-      .hero-phone-wrap { display: none; }
-      .features-grid, .steps, .partner-types, .depo-grid { grid-template-columns: 1fr 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
-      nav .nav-links { display: none; }
-      section { padding: 56px 20px; }
-      .features-grid, .steps, .partner-types, .depo-grid, .footer-grid { grid-template-columns: 1fr; }
-      .phones-row .phone:not(:first-child) { display: none; }
-    }
-
-    /* ─── MAP POPUP ─────────────────────────────────────────────── */
-    .leaflet-popup-content-wrapper { border-radius: 10px !important; }
-    .camp-popup { display: flex; flex-direction: column; gap: 4px; }
-    .camp-popup-name { font-weight: 700; font-size: .9rem; }
-    .camp-popup-loc { font-size: .78rem; color: var(--muted); }
-    .camp-popup-stars { font-size: .8rem; color: #f4a261; }
-    .camp-popup-badge {
-      display: inline-block; background: var(--green-light); color: var(--green-dark);
-      border-radius: 12px; padding: 2px 8px; font-size: .7rem; font-weight: 600; margin-top: 2px;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css" />
 </head>
 <body>
 
-<!-- ─── NAVEGAÇÃO ───────────────────────────────────────────────── -->
-<nav>
+<nav class="site-nav">
   <a class="nav-logo" href="#hero">
-    <svg viewBox="0 0 728 170" xmlns="http://www.w3.org/2000/svg" style="fill-rule:evenodd;clip-rule:evenodd">
-      <g>
-        <path d="M480.421,7.007l-14.233,-6.898l7.764,20.427l-52.531,97.971l-19.548,36.813l-18.372,-13.313l7.737,27.585l176.472,0l9.892,-26.585l-17.959,12.313l-22.721,-40.813l-50.788,-93.933l9.286,-20.465l-14.998,6.898Zm0,108.5l16.26,39.813l-30.76,0.187l14.5,-40Zm-6.429,-68.903l-0.48,52.143l-24.435,56.573l-32.144,0.388l57.059,-109.104Zm12.116,0l58.437,108.716l-30.571,0l-27.431,-56.813l-0.434,-51.903Z" style="fill:none;stroke:#1D9E75;stroke-width:5px;"/>
-        <path d="M189.69,0.059l-13.519,48.897l-1.259,120.637l27.755,0l0.031,-120.972l-13.008,-48.562Z" style="fill:none;stroke:#111;stroke-width:5px;"/>
-        <path d="M697.456,0.109l-64.035,68.898l0,34.5l8,-8l55.965,74.085l30.5,0l-66.965,-93.085l66.965,-76.398l-30.43,0Zm-103.946,0l-1.592,169.484l27.411,0l-0.586,-169.484l-25.233,0Zm-198.589,-0.102l-44.695,46.597l-22.805,58.403l13,37.5l54.5,-142.5Zm-151.5,0.102l63.24,169.484l28.518,-0l-46.147,-122.988l-45.611,-46.495Zm-143.955,0l-57.045,68.898l0,34.5l8,-8l53.072,74.085l35.572,0l-69.145,-92.085l0,-4.5l58.217,-72.898l-28.672,0Zm-99.453,-0l-0,169.484l26.5,0l0.407,-169.484l-26.907,-0Z" style="fill:none;stroke:#111;stroke-width:5px;"/>
-      </g>
-    </svg>
+    <svg width="30" height="30" viewBox="0 0 30 30"><rect width="30" height="30" rx="8" fill="#1D9E75"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="15" fill="#fff">K</text></svg>
+    <span class="nav-logo-text" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.05rem">KIVAK</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#features">Recursos</a></li>
-    <li><a href="#mockups">O App</a></li>
-    <li><a href="#mapa">Mapa</a></li>
-    <li><a href="#investidores">Investidores</a></li>
-    <li><a href="#parceiros">Parceiros</a></li>
+    <li><a href="#recursos">Recursos</a></li>
+    <li><a href="#comunidades">Comunidades</a></li>
+    <li><a href="empresas.html">Empresas</a></li>
   </ul>
-  <a class="nav-cta" href="#investidores">Seja Parceiro</a>
+  <div class="nav-right">
+    <a class="btn btn-ghost-light btn-sm" href="empresas.html">Sou empresa</a>
+    <a class="btn btn-primary btn-sm" href="#baixar">Baixar o app</a>
+  </div>
 </nav>
 
 <!-- ─── HERO ────────────────────────────────────────────────────── -->
-<section id="hero">
-  <div class="hero-particles"></div>
-  <div class="hero-grid">
-    <div class="hero-text fade-in">
-      <div class="section-label" style="color:#1D9E75">Novo no Brasil</div>
-      <h1>O app que nasceu<br/>nas trilhas e<br/><span>vive nas aventuras.</span></h1>
-      <p class="hero-tagline">Imagine ter na palma da mão um guia completo de acampamentos brasileiros, um diário de aventuras, uma rede de amigos que respira ar puro e um mapa das trilhas mais incríveis do país — tudo em um só lugar.</p>
-      <div class="hero-btns">
-        <a class="btn-primary" href="#mockups">🏕️ Ver o App</a>
-        <a class="btn-outline" href="#investidores">💼 Para Investidores</a>
-      </div>
-    </div>
-    <div class="hero-phone-wrap fade-in">
-      <!-- Hero phone: Feed screen -->
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="app-screen">
-            <div class="app-header">
-              <div class="app-header-row">
-                <span class="app-title">KIVAK</span>
-                <div class="app-icon-row">
-                  <div class="app-icon">🔍</div>
-                  <div class="app-icon" style="position:relative">🔔<span style="position:absolute;top:-2px;right:-2px;width:7px;height:7px;background:#e63946;border-radius:50%;border:1px solid white;font-size:0"></span></div>
-                </div>
-              </div>
-            </div>
-            <div class="app-content">
-              <div class="story-row">
-                <div class="story"><div class="story-avatar">🧗</div><div class="story-name">Ana</div></div>
-                <div class="story"><div class="story-avatar">🏕️</div><div class="story-name">Pedro</div></div>
-                <div class="story"><div class="story-avatar">🥾</div><div class="story-name">Lua</div></div>
-                <div class="story"><div class="story-avatar">🌊</div><div class="story-name">Rafael</div></div>
-                <div class="story"><div class="story-avatar">⛺</div><div class="story-name">Gabi</div></div>
-              </div>
-              <div class="post-card">
-                <div class="post-header">
-                  <div class="post-avatar">🧗</div>
-                  <div class="post-user-info">
-                    <div class="post-user">Ana Beatriz</div>
-                    <div class="post-loc">📍 Chapada Diamantina, BA</div>
-                  </div>
-                </div>
-                <div class="post-img">🌄</div>
-                <div class="post-actions">
-                  <div class="post-action liked">❤️ 47</div>
-                  <div class="post-action">💬 12</div>
-                  <div class="post-action">⭐ 5.0</div>
-                </div>
-                <div class="post-caption">Vale do Pati nunca decepciona. Dormi sob um céu cheio de estrelas 🌟</div>
-              </div>
-              <div class="post-card">
-                <div class="post-header">
-                  <div class="post-avatar">🥾</div>
-                  <div class="post-user-info">
-                    <div class="post-user">Pedro Trilheiro</div>
-                    <div class="post-loc">📍 Serra da Canastra, MG</div>
-                  </div>
-                </div>
-                <div class="post-img img2">🏔️</div>
-                <div class="post-actions">
-                  <div class="post-action liked">❤️ 31</div>
-                  <div class="post-action">💬 8</div>
-                </div>
-                <div class="post-caption">18 km hoje. Nascente do São Francisco te espera!</div>
-              </div>
-            </div>
-            <div class="app-tabbar">
-              <div class="app-tab"><div class="app-tab-icon">🏕️</div>Campings</div>
-              <div class="app-tab active"><div class="app-tab-icon">📸</div>Feed</div>
-              <div class="app-tab-plus"><div class="plus-btn">+</div></div>
-              <div class="app-tab"><div class="app-tab-icon">👥</div>Grupos</div>
-              <div class="app-tab"><div class="app-tab-icon">👤</div>Perfil</div>
-            </div>
-          </div>
-        </div>
-      </div>
+<header class="hero" id="hero" style="background-image:url('assets/images/hero-trilheiro.jpg')">
+  <div class="container hero-content fade-in visible">
+    <span class="hero-eyebrow">🥾 Feito no Brasil, pra trilha brasileira</span>
+    <h1>O mapa acaba<br/>onde a sua <em>perna</em><br/>começa.</h1>
+    <p class="lede">KIVAK é a rede social de quem sai de casa pra valer: trilha com GPS de verdade, campings avaliados por quem dormiu lá, e comunidades que organizam a saída — não só conversam sobre ela.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#baixar">📲 Quero baixar</a>
+      <a class="btn btn-ghost-light" href="empresas.html">💼 Sou uma empresa</a>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ─── FEATURES ─────────────────────────────────────────────────── -->
-<section id="features">
+<!-- ─── RECURSOS ────────────────────────────────────────────────── -->
+<section id="recursos">
   <div class="container">
-    <div class="features-header fade-in">
-      <div class="section-label">Tudo o que você precisa</div>
-      <h2 class="section-title">Uma plataforma. Infinitas aventuras.</h2>
-      <p class="section-sub">Do descobrimento ao relato, do camping à comunidade — o KIVAK acompanha cada etapa da sua aventura na natureza brasileira.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🏕️</div>
-        <h3 class="feature-title">Campings Avaliados</h3>
-        <p class="feature-text">Descubra campings avaliados por pessoas reais que estiveram lá. Fotos verdadeiras, notas honestas, zero propaganda.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🥾</div>
-        <h3 class="feature-title">Trilhas com GPS</h3>
-        <p class="feature-text">Grave sua trilha em tempo real. O app calcula distância, tempo e dificuldade automaticamente e compartilha com a comunidade.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">📸</div>
-        <h3 class="feature-title">Feed de Aventuras</h3>
-        <p class="feature-text">Publique fotos e vídeos das suas expedições. Receba curtidas de pessoas que entendem exatamente o que você viveu.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">👥</div>
-        <h3 class="feature-title">Comunidades</h3>
-        <p class="feature-text">Entre em grupos por interesse, região ou estilo. Organize eventos reais e chame membros para aventuras.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">💬</div>
-        <h3 class="feature-title">Chat em Tempo Real</h3>
-        <p class="feature-text">Converse diretamente com outros aventureiros. Combine trilhas, encontre parceiros de camping por perto de você.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">🏅</div>
-        <h3 class="feature-title">Badges & Conquistas</h3>
-        <p class="feature-text">Evolua no app e ganhe reconhecimento. Badges aparecem automaticamente conforme você explora e contribui.</p>
+
+    <div class="feature-row fade-in">
+      <div class="feature-media"><img src="assets/images/trilha-montanha.jpg" alt="Trilheiro caminhando em direção às montanhas" loading="lazy" /></div>
+      <div class="feature-text">
+        <span class="feature-tag">🥾 Registro de atividade</span>
+        <h3>Não é mais uma rede social. É o seu registro de campo.</h3>
+        <p>Você já tem onde postar foto bonita. O que faltava era o lugar onde ela vem acompanhada — da trilha inteira desenhada no mapa, do desnível real, do tempo que levou.</p>
+        <p>Quando você grava uma trilha no KIVAK, a gente grava de verdade: velocidade, altimetria ao vivo, ganho e perda de elevação, o traçado ponto a ponto — com filtro de ruído de GPS, pra o que fica no seu perfil ser o que seus pés fizeram, não o que o satélite achou que fez.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ─── MOCKUPS ───────────────────────────────────────────────────── -->
-<section id="mockups">
-  <div class="container">
-    <div class="mockups-header fade-in">
-      <div class="section-label">O App por Dentro</div>
-      <h2 class="section-title">Cada tela feita para o aventureiro</h2>
-      <p class="section-sub">Interface limpa, intuitiva e em português. Porque quem está na trilha não tem tempo para app complicado.</p>
-    </div>
-    <div class="phones-row">
-
-      <!-- Phone 1: Campings -->
-      <div style="display:flex;flex-direction:column;align-items:center">
-        <div class="phone small fade-in">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="app-screen">
-              <div class="app-header">
-                <div class="app-header-row">
-                  <span class="app-title">Campings</span>
-                  <div class="app-icon-row"><div class="app-icon">🔍</div></div>
-                </div>
-              </div>
-              <div class="app-content">
-                <div class="camp-search">🔍 Buscar camping ou cidade...</div>
-                <div class="camp-card">
-                  <div class="camp-card-img c1">⛺</div>
-                  <div class="camp-card-body">
-                    <div class="camp-name">Chapada Diamantina</div>
-                    <div class="camp-loc">📍 Lençóis, BA</div>
-                    <div class="camp-stars">★★★★★ 4.9 · 234 avaliações</div>
-                  </div>
-                </div>
-                <div class="camp-card">
-                  <div class="camp-card-img c2">🏔️</div>
-                  <div class="camp-card-body">
-                    <div class="camp-name">Serra da Canastra</div>
-                    <div class="camp-loc">📍 São Roque de Minas, MG</div>
-                    <div class="camp-stars">★★★★☆ 4.7 · 189 avaliações</div>
-                  </div>
-                </div>
-                <div class="camp-card">
-                  <div class="camp-card-img c3">🌿</div>
-                  <div class="camp-card-body">
-                    <div class="camp-name">Chapada dos Veadeiros</div>
-                    <div class="camp-loc">📍 Alto Paraíso, GO</div>
-                    <div class="camp-stars">★★★★★ 4.8 · 312 avaliações</div>
-                  </div>
-                </div>
-              </div>
-              <div class="app-tabbar">
-                <div class="app-tab active"><div class="app-tab-icon">🏕️</div>Campings</div>
-                <div class="app-tab"><div class="app-tab-icon">📸</div>Feed</div>
-                <div class="app-tab-plus"><div class="plus-btn">+</div></div>
-                <div class="app-tab"><div class="app-tab-icon">👥</div>Grupos</div>
-                <div class="app-tab"><div class="app-tab-icon">👤</div>Perfil</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-label">Campings</div>
-      </div>
-
-      <!-- Phone 2: Feed (center, larger) -->
-      <div style="display:flex;flex-direction:column;align-items:center">
-        <div class="phone fade-in" style="transform:translateY(-20px)">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="app-screen">
-              <div class="app-header">
-                <div class="app-header-row">
-                  <span class="app-title">KIVAK</span>
-                  <div class="app-icon-row">
-                    <div class="app-icon">🔍</div>
-                    <div class="app-icon">🔔</div>
-                  </div>
-                </div>
-              </div>
-              <div class="app-content">
-                <div class="story-row">
-                  <div class="story"><div class="story-avatar">🧗</div><div class="story-name">Ana</div></div>
-                  <div class="story"><div class="story-avatar">🏕️</div><div class="story-name">Pedro</div></div>
-                  <div class="story"><div class="story-avatar">🥾</div><div class="story-name">Lua</div></div>
-                  <div class="story"><div class="story-avatar">🌊</div><div class="story-name">Rafael</div></div>
-                  <div class="story"><div class="story-avatar">⛺</div><div class="story-name">Gabi</div></div>
-                </div>
-                <!-- Trilha card -->
-                <div class="post-card">
-                  <div class="post-header">
-                    <div class="post-avatar">🥾</div>
-                    <div class="post-user-info">
-                      <div class="post-user">Luara Montanha</div>
-                      <div class="post-loc">🥾 Trilha gravada · 12,4 km</div>
-                    </div>
-                  </div>
-                  <div class="post-img img3" style="height:70px;gap:12px;display:flex;align-items:center;justify-content:center;font-size:1rem">
-                    <span>🗺️</span><span style="font-size:.5rem;color:rgba(255,255,255,.8)">12,4 km · 3h42 · Moderada</span>
-                  </div>
-                  <div class="post-actions">
-                    <div class="post-action liked">❤️ 63</div>
-                    <div class="post-action">💬 19</div>
-                    <div class="post-action">📤 Salvar</div>
-                  </div>
-                  <div class="post-caption">Trilha da Cachoeira do Buracão. Imperdível!</div>
-                </div>
-                <div class="post-card">
-                  <div class="post-header">
-                    <div class="post-avatar">🌊</div>
-                    <div class="post-user-info">
-                      <div class="post-user">Rafael Costas</div>
-                      <div class="post-loc">📍 Ilhabela, SP</div>
-                    </div>
-                  </div>
-                  <div class="post-img" style="background:linear-gradient(135deg,#023e8a,#0077b6,#48cae4)">🌊</div>
-                  <div class="post-actions">
-                    <div class="post-action liked">❤️ 88</div>
-                    <div class="post-action">💬 24</div>
-                  </div>
-                  <div class="post-caption">Camping de frente pro mar. Isso é liberdade 🌅</div>
-                </div>
-              </div>
-              <div class="app-tabbar">
-                <div class="app-tab"><div class="app-tab-icon">🏕️</div>Campings</div>
-                <div class="app-tab active"><div class="app-tab-icon">📸</div>Feed</div>
-                <div class="app-tab-plus"><div class="plus-btn">+</div></div>
-                <div class="app-tab"><div class="app-tab-icon">👥</div>Grupos</div>
-                <div class="app-tab"><div class="app-tab-icon">👤</div>Perfil</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-label" style="color:rgba(255,255,255,.7)">Feed</div>
-      </div>
-
-      <!-- Phone 3: Profile -->
-      <div style="display:flex;flex-direction:column;align-items:center">
-        <div class="phone small fade-in">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="app-screen" style="background:#fff">
-              <div class="profile-header">
-                <div class="profile-avatar">🧗</div>
-                <div class="profile-name">Ana Beatriz</div>
-                <div class="profile-user">@anabeatriz</div>
-                <div class="profile-stats">
-                  <div class="profile-stat"><div class="profile-stat-n">47</div><div class="profile-stat-l">Trilhas</div></div>
-                  <div class="profile-stat"><div class="profile-stat-n">138</div><div class="profile-stat-l">Campings</div></div>
-                  <div class="profile-stat"><div class="profile-stat-n">892</div><div class="profile-stat-l">Amigos</div></div>
-                </div>
-              </div>
-              <div class="badges-section">
-                <div class="badges-title">🏅 Conquistas</div>
-                <div class="badges-grid">
-                  <div class="badge"><div class="badge-icon">🥾</div><div class="badge-name">Primeira Trilha</div></div>
-                  <div class="badge"><div class="badge-icon">⭐</div><div class="badge-name">5 Avaliações</div></div>
-                  <div class="badge"><div class="badge-icon">📏</div><div class="badge-name">100 km</div></div>
-                  <div class="badge"><div class="badge-icon">👥</div><div class="badge-name">Comunidade</div></div>
-                  <div class="badge"><div class="badge-icon">🏕️</div><div class="badge-name">10 Campings</div></div>
-                  <div class="badge" style="border:1px dashed #ddd;opacity:.4"><div class="badge-icon">🌟</div><div class="badge-name">500 km</div></div>
-                  <div class="badge" style="border:1px dashed #ddd;opacity:.4"><div class="badge-icon">🗺️</div><div class="badge-name">Explorador</div></div>
-                  <div class="badge" style="border:1px dashed #ddd;opacity:.4"><div class="badge-icon">🔥</div><div class="badge-name">30 dias</div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-label">Perfil & Badges</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ─── MAPA ──────────────────────────────────────────────────────── -->
-<section id="mapa">
-  <div class="map-header container fade-in">
-    <div class="section-label">Mapa Interativo</div>
-    <h2 class="section-title">Campings em todo o Brasil</h2>
-    <p class="section-sub">Explore centenas de locais cadastrados, veja avaliações e encontre sua próxima aventura. Clique nos marcadores para mais detalhes.</p>
-  </div>
-  <div id="leaflet-map"></div>
-</section>
-
-<!-- ─── STATS ─────────────────────────────────────────────────────── -->
-<section id="stats">
-  <div class="stats-grid fade-in">
-    <div class="stat-item"><div class="stat-num" data-target="500">0</div><div class="stat-label">Campings cadastrados</div></div>
-    <div class="stat-item"><div class="stat-num" data-target="1200">0</div><div class="stat-label">Trilhas mapeadas</div></div>
-    <div class="stat-item"><div class="stat-num" data-target="20000">0</div><div class="stat-label">Usuários ativos</div></div>
-    <div class="stat-item"><div class="stat-num" data-target="27">0</div><div class="stat-label">Estados do Brasil</div></div>
-  </div>
-</section>
-
-<!-- ─── COMO FUNCIONA ─────────────────────────────────────────────── -->
-<section id="como">
-  <div class="container">
-    <div class="fade-in" style="text-align:center;margin-bottom:16px">
-      <div class="section-label">Simples assim</div>
-      <h2 class="section-title">Comece em 3 passos</h2>
-    </div>
-    <div class="steps">
-      <div class="step fade-in">
-        <div class="step-num">1</div>
-        <h3 class="step-title">Crie seu perfil</h3>
-        <p class="step-text">Baixe o app, crie sua conta em segundos e personalize seu perfil de aventureiro. Adicione seus interesses e localização.</p>
-      </div>
-      <div class="step fade-in">
-        <div class="step-num">2</div>
-        <h3 class="step-title">Explore e conecte</h3>
-        <p class="step-text">Encontre campings próximos, veja trilhas populares, siga aventureiros com a mesma vibe e entre em comunidades do seu interesse.</p>
-      </div>
-      <div class="step fade-in">
-        <div class="step-num">3</div>
-        <h3 class="step-title">Saia e registre</h3>
-        <p class="step-text">Vai para a trilha? Ative o GPS e grave. Voltou do camping? Publique fotos, avalie e contribua para a comunidade.</p>
+    <div class="feature-row reverse fade-in">
+      <div class="feature-media"><img src="assets/images/camping-noite.jpg" alt="Barraca iluminada sob céu estrelado" loading="lazy" /></div>
+      <div class="feature-text">
+        <span class="feature-tag">⛺ Campings avaliados</span>
+        <h3>O que você levou 4 horas pra descobrir, alguém leva 4 segundos.</h3>
+        <p>O melhor camping do Brasil normalmente não tem estrela no Google, não tem site — só é conhecido por quem chegou lá por indicação. Esse conhecimento morre no grupo de WhatsApp.</p>
+        <p>No KIVAK ele vira mapa: camping cadastrado, localizado e avaliado por quem esteve lá. Não por algoritmo, não por anúncio pago — por gente que dormiu ali.</p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ─── INVESTIDORES ──────────────────────────────────────────────── -->
-<section id="investidores">
-  <div class="container">
-    <div class="fade-in">
-      <div class="section-label">Para Investidores</div>
-      <h2 class="section-title">Uma oportunidade única no<br/>mercado outdoor brasileiro</h2>
-      <p class="section-sub">O Brasil tem uma das naturezas mais ricas do planeta e mais de 20 milhões de praticantes de ecoturismo. Faltava a plataforma que une essas pessoas.</p>
-    </div>
-    <div class="invest-grid">
-      <div class="invest-left fade-in">
-        <h3>Mercado & Oportunidade</h3>
-        <p>O ecoturismo no Brasil movimenta <strong>R$ 21 bilhões por ano</strong> e cresce 15% ao ano. O KIVAK é a primeira rede social focada exclusivamente nesse público — sem concorrência direta consolidada no mercado nacional.</p>
-        <div class="market-pills">
-          <span class="pill">🏕️ 20M+ campistas no Brasil</span>
-          <span class="pill">🥾 Trilheiros crescem 30% ao ano</span>
-          <span class="pill">🌿 Ecoturismo = R$ 21bi/ano</span>
-          <span class="pill">📱 88% usam smartphone na trilha</span>
-        </div>
-        <h3>Modelo de Receita</h3>
-        <ul class="revenue-list">
-          <li class="revenue-item">
-            <div class="revenue-item-icon">📢</div>
-            <div class="revenue-item-text">
-              <strong>Anúncios segmentados (Google AdMob)</strong>
-              <span>Publicidade ultra-segmentada para marcas de equipamentos, seguros, turismo e natureza. Já integrado ao app.</span>
-            </div>
-          </li>
-          <li class="revenue-item">
-            <div class="revenue-item-icon">🏪</div>
-            <div class="revenue-item-text">
-              <strong>Listagens Premium para Campings</strong>
-              <span>Donos de campings pagam para destaque no mapa, fotos em alta resolução e selo verificado.</span>
-            </div>
-          </li>
-          <li class="revenue-item">
-            <div class="revenue-item-icon">🔗</div>
-            <div class="revenue-item-text">
-              <strong>Links de Afiliado</strong>
-              <span>Equipamentos e produtos recomendados pela comunidade com comissionamento automático.</span>
-            </div>
-          </li>
-          <li class="revenue-item">
-            <div class="revenue-item-icon">⭐</div>
-            <div class="revenue-item-text">
-              <strong>KIVAK Premium</strong>
-              <span>Assinatura para trilhas offline, badge exclusivo, histórico ilimitado e sem anúncios.</span>
-            </div>
-          </li>
-          <li class="revenue-item">
-            <div class="revenue-item-icon">🤝</div>
-            <div class="revenue-item-text">
-              <strong>Parcerias Institucionais</strong>
-              <span>Secretarias de turismo, parques nacionais e ONGs de conservação ambiental.</span>
-            </div>
-          </li>
+    <div class="feature-row fade-in" id="comunidades">
+      <div class="feature-media"><img src="assets/images/amigos-montanha.jpg" alt="Grupo de amigos rindo durante uma trilha nas montanhas" loading="lazy" /></div>
+      <div class="feature-text">
+        <span class="feature-tag">👥 Comunidades de verdade</span>
+        <h3>Grupo de WhatsApp não organiza saída. Nunca organizou.</h3>
+        <p>Sessenta pessoas no grupo, trinta e duas mensagens sobre a data, e no dia aparecem três. No KIVAK, comunidade é comunidade de verdade: tem regra, tem quem administra.</p>
+        <ul class="feature-list">
+          <li>Eventos com data, local e lista de quem confirmou</li>
+          <li>Comunidades por região, modalidade ou estilo</li>
+          <li>Feed, curtidas, comentários e chat direto</li>
         </ul>
       </div>
-      <div class="invest-right">
-        <div class="contact-card fade-in">
-          <h3>Fale com o Time KIVAK</h3>
-          <p>Seja para investir, anunciar sua marca ou fazer sua operação de camping crescer — queremos ouvir você.</p>
-          <div class="metric-grid">
-            <div class="metric-box"><div class="metric-n">R$ 21bi</div><div class="metric-l">Tamanho do mercado</div></div>
-            <div class="metric-box"><div class="metric-n">20M+</div><div class="metric-l">Usuários potenciais</div></div>
-            <div class="metric-box"><div class="metric-n">15%</div><div class="metric-l">Crescimento anual</div></div>
-            <div class="metric-box"><div class="metric-n">27</div><div class="metric-l">Estados atendidos</div></div>
-          </div>
-          <form class="contact-form" onsubmit="handleContactForm(event)">
-            <input type="text" placeholder="Seu nome completo" required />
-            <input type="email" placeholder="E-mail profissional" required />
-            <input type="text" placeholder="Empresa / Organização" />
-            <select>
-              <option value="" disabled selected>Tipo de interesse</option>
-              <option>Investidor Anjo</option>
-              <option>Fundo de Investimento</option>
-              <option>Anunciante / Marca</option>
-              <option>Dono de Camping</option>
-              <option>Parceria Institucional</option>
-              <option>Afiliado / Influenciador</option>
-              <option>Outro</option>
-            </select>
-            <textarea rows="3" placeholder="Conte brevemente sobre seu interesse..."></textarea>
-            <button type="submit">Enviar mensagem →</button>
-          </form>
-          <div class="trust-badges">
-            <div class="trust-badge">✅ Startup brasileira</div>
-            <div class="trust-badge">📱 App na App Store & Google Play</div>
-            <div class="trust-badge">🔒 LGPD compliant</div>
-          </div>
-        </div>
-      </div>
     </div>
+
   </div>
 </section>
 
-<!-- ─── PARCEIROS ─────────────────────────────────────────────────── -->
-<section id="parceiros">
+<!-- ─── QUOTE / ESFORÇO VIRA HISTÓRIA ───────────────────────────── -->
+<section class="quote-strip fade-in" style="background-image:url('assets/images/amigos-por-do-sol.jpg')">
   <div class="container">
-    <div class="fade-in">
-      <div class="section-label">Tipos de Parceria</div>
-      <h2 class="section-title">Quem pode se beneficiar</h2>
-    </div>
-    <p class="parceiros-sub fade-in">O KIVAK conecta marcas a um público altamente engajado de aventureiros. Veja como sua empresa pode aparecer para quem realmente importa.</p>
-    <div class="partner-types">
-      <div class="partner-type fade-in">
-        <div class="partner-type-icon">🏪</div>
-        <h4>Lojas de Equipamentos</h4>
-        <p>Apareça quando o usuário está planejando sua próxima trilha. Anúncios contextuais com altíssima intenção de compra.</p>
-      </div>
-      <div class="partner-type fade-in">
-        <div class="partner-type-icon">⛺</div>
-        <h4>Campings & Operadores</h4>
-        <p>Destaque seu camping no mapa interativo, receba avaliações verificadas e atraia visitantes qualificados.</p>
-      </div>
-      <div class="partner-type fade-in">
-        <div class="partner-type-icon">🚗</div>
-        <h4>Seguros & Assistência</h4>
-        <p>Seguro de aventura, assistência veicular em estradas de terra, planos de saúde outdoor — público perfeito.</p>
-      </div>
-      <div class="partner-type fade-in">
-        <div class="partner-type-icon">🌿</div>
-        <h4>ONGs & Conservação</h4>
-        <p>Parcerias para conscientização ambiental, deixe sem traço, preservação de trilhas e nascentes.</p>
-      </div>
-      <div class="partner-type fade-in">
-        <div class="partner-type-icon">🏛️</div>
-        <h4>Secretarias de Turismo</h4>
-        <p>Promova destinos de ecoturismo para o público certo. Parcerias com municípios e estados para mapear atrativos.</p>
-      </div>
-      <div class="partner-type fade-in">
-        <div class="partner-type-icon">📸</div>
-        <h4>Criadores & Influenciadores</h4>
-        <p>Seja parceiro de conteúdo. O KIVAK tem um programa de afiliados para criadores de conteúdo outdoor.</p>
-      </div>
-    </div>
+    <blockquote>“Num ano bom, seu mapa de calor fica verde inteiro — e você vê. As conquistas não são curtidas. São quilômetros. Ninguém pode te dar de presente.”</blockquote>
+    <cite>Seu esforço vira história — badges e heatmap de atividade no seu perfil</cite>
   </div>
 </section>
 
-<!-- ─── DEPOIMENTOS ───────────────────────────────────────────────── -->
-<section id="depoimentos">
+<!-- ─── SOCIAL ──────────────────────────────────────────────────── -->
+<section class="bg-gray">
   <div class="container">
-    <div class="fade-in" style="text-align:center;margin-bottom:16px">
-      <div class="section-label">Comunidade</div>
-      <h2 class="section-title">O que os aventureiros dizem</h2>
+    <div class="center wrap-narrow fade-in" style="margin-bottom:8px">
+      <span class="eyebrow" style="display:block;text-align:center">E sim, tem foto. Tem vídeo. Tem conversa.</span>
+      <h2 class="title">A parte social funciona como você já espera.</h2>
+      <p class="sub center">Stories que somem em 24h, reels pra descida de bike merecer ser vista em movimento, feed com curtida e comentário, chat direto pra tirar o papo do grupo. A diferença é o que está por baixo dela.</p>
     </div>
-    <div class="depo-grid">
-      <div class="depo-card fade-in">
-        <div class="depo-stars">★★★★★</div>
-        <p class="depo-text">"Finalmente um app que entende quem gosta de trilha. Gravei minha primeira trilha na Chapada e a emoção de ver o mapa foi indescritível."</p>
-        <div class="depo-author">
-          <div class="depo-avatar">🥾</div>
-          <div><div class="depo-name">Mariana S.</div><div class="depo-role">Trilheira · Belo Horizonte, MG</div></div>
-        </div>
+    <div class="card-grid">
+      <div class="card fade-in">
+        <div class="card-icon">⭕</div>
+        <h4>Stories</h4>
+        <p>Nem tudo precisa virar monumento — poste o momento e ele some em 24 horas.</p>
       </div>
-      <div class="depo-card fade-in">
-        <div class="depo-stars">★★★★★</div>
-        <p class="depo-text">"Conheci meu grupo de camping atual pelo KIVAK. Hoje somos uma comunidade de 80 pessoas e organizamos saídas mensais. Absurdo demais."</p>
-        <div class="depo-author">
-          <div class="depo-avatar">🏕️</div>
-          <div><div class="depo-name">Carlos M.</div><div class="depo-role">Campista · São Paulo, SP</div></div>
-        </div>
+      <div class="card fade-in">
+        <div class="card-icon">🎬</div>
+        <h4>Reels</h4>
+        <p>Vídeo vertical em feed infinito, pra aquele trecho que só faz sentido em movimento.</p>
       </div>
-      <div class="depo-card fade-in">
-        <div class="depo-stars">★★★★★</div>
-        <p class="depo-text">"As avaliações do KIVAK são honestas de verdade. Evitei dois campings péssimos e encontrei um paraíso escondido no interior do RS graças ao app."</p>
-        <div class="depo-author">
-          <div class="depo-avatar">🌲</div>
-          <div><div class="depo-name">Fernanda L.</div><div class="depo-role">Exploradora · Porto Alegre, RS</div></div>
-        </div>
+      <div class="card fade-in">
+        <div class="card-icon">📸</div>
+        <h4>Feed</h4>
+        <p>Publique fotos e trilhas gravadas, com curtidas e comentários de quem entende.</p>
+      </div>
+      <div class="card fade-in">
+        <div class="card-icon">💬</div>
+        <h4>Chat</h4>
+        <p>Converse direto com outros aventureiros pra combinar a próxima saída.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ────────────────────────────────────────────────────── -->
+<!-- ─── DOWNLOAD / LISTA DE ESPERA ──────────────────────────────── -->
+<section id="baixar">
+  <div class="container download-grid">
+    <div class="download-copy fade-in">
+      <span class="eyebrow">Acesso antecipado</span>
+      <h2 class="title">Baixe. Grave a primeira.<br/>Veja o mapa ficar seu.</h2>
+      <p class="sub">O KIVAK está em fase de lançamento controlado — o app é distribuído direto (sem loja), e liberamos o acesso aos poucos. Deixe seu contato abaixo que avisamos assim que estiver liberado pra você.</p>
+    </div>
+    <div class="form-card fade-in">
+      <h3>Quero acesso ao KIVAK</h3>
+      <p class="form-sub">Leva 15 segundos. Você recebe um e-mail assim que seu acesso for liberado.</p>
+      <form id="form-acesso" novalidate>
+        <div class="field">
+          <label for="nome">Seu nome</label>
+          <input type="text" id="nome" name="nome" required minlength="2" placeholder="Como podemos te chamar" />
+        </div>
+        <div class="field">
+          <label for="email">Seu e-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu@email.com" />
+        </div>
+        <div class="field">
+          <label>Qual celular você usa?</label>
+          <div class="platform-choice">
+            <label class="platform-option">
+              <input type="radio" name="plataforma" value="android" />
+              🤖 Android
+            </label>
+            <label class="platform-option">
+              <input type="radio" name="plataforma" value="ios" />
+              🍎 iPhone
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Quero acesso →</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────────────────────────────────── -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <svg viewBox="0 0 728 170" xmlns="http://www.w3.org/2000/svg" style="height:28px;fill-rule:evenodd;clip-rule:evenodd">
+        <svg viewBox="0 0 728 170" xmlns="http://www.w3.org/2000/svg" style="height:26px;fill-rule:evenodd;clip-rule:evenodd">
           <g>
             <path d="M480.421,7.007l-14.233,-6.898l7.764,20.427l-52.531,97.971l-19.548,36.813l-18.372,-13.313l7.737,27.585l176.472,0l9.892,-26.585l-17.959,12.313l-22.721,-40.813l-50.788,-93.933l9.286,-20.465l-14.998,6.898Zm0,108.5l16.26,39.813l-30.76,0.187l14.5,-40Zm-6.429,-68.903l-0.48,52.143l-24.435,56.573l-32.144,0.388l57.059,-109.104Zm12.116,0l58.437,108.716l-30.571,0l-27.431,-56.813l-0.434,-51.903Z" style="fill:none;stroke:#1D9E75;stroke-width:5px;"/>
             <path d="M189.69,0.059l-13.519,48.897l-1.259,120.637l27.755,0l0.031,-120.972l-13.008,-48.562Z" style="fill:none;stroke:#aaa;stroke-width:5px;"/>
             <path d="M697.456,0.109l-64.035,68.898l0,34.5l8,-8l55.965,74.085l30.5,0l-66.965,-93.085l66.965,-76.398l-30.43,0Zm-103.946,0l-1.592,169.484l27.411,0l-0.586,-169.484l-25.233,0Zm-198.589,-0.102l-44.695,46.597l-22.805,58.403l13,37.5l54.5,-142.5Zm-151.5,0.102l63.24,169.484l28.518,-0l-46.147,-122.988l-45.611,-46.495Zm-143.955,0l-57.045,68.898l0,34.5l8,-8l53.072,74.085l35.572,0l-69.145,-92.085l0,-4.5l58.217,-72.898l-28.672,0Zm-99.453,-0l-0,169.484l26.5,0l0.407,-169.484l-26.907,-0Z" style="fill:none;stroke:#aaa;stroke-width:5px;"/>
           </g>
         </svg>
-        <p>O app que nasceu nas trilhas e vive nas aventuras. Feito por quem acampa, para quem acampa.</p>
+        <p>Rede social de trilha, camping e aventura. Feito no Brasil, pra trilha brasileira.</p>
       </div>
       <div class="footer-col">
-        <h5>O App</h5>
-        <a href="#features">Recursos</a>
-        <a href="#mockups">Telas</a>
-        <a href="#mapa">Mapa</a>
-        <a href="#como">Como funciona</a>
+        <h5>KIVAK</h5>
+        <a href="#recursos">Recursos</a>
+        <a href="#comunidades">Comunidades</a>
+        <a href="#baixar">Baixar o app</a>
       </div>
       <div class="footer-col">
         <h5>Negócios</h5>
-        <a href="#investidores">Investidores</a>
-        <a href="#parceiros">Parceiros</a>
-        <a href="#parceiros">Anunciantes</a>
-        <a href="#investidores">Contato</a>
-      </div>
-      <div class="footer-col">
-        <h5>Legal</h5>
-        <a href="#">Termos de Uso</a>
-        <a href="#">Privacidade</a>
-        <a href="#">LGPD</a>
-        <a href="#">Cookies</a>
+        <a href="empresas.html">Anuncie no KIVAK</a>
+        <a href="https://mkt.kivak.app/login">Painel de anunciante</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 KIVAK. Todos os direitos reservados.</span>
-      <span>Feito com ❤️ para os aventureiros do Brasil</span>
+      <span>© 2026 KIVAK. Todos os direitos reservados.</span>
+      <span>Feito para quem sai de casa no fim de semana.</span>
     </div>
   </div>
 </footer>
 
-<script src="assets/web/leaflet.min.js"></script>
-<script src="assets/web/markercluster.js"></script>
-<script>
-// ─── MAPA INTERATIVO ─────────────────────────────────────────────
-const campings = [
-  { name: "Vale do Pati", loc: "Mucugê, BA", lat: -13.03, lng: -41.55, nota: 4.9, n: 234, tipo: "🏔️ Trekking" },
-  { name: "Chapada Diamantina", loc: "Lençóis, BA", lat: -12.56, lng: -41.39, nota: 4.9, n: 312, tipo: "🌊 Cachoeira" },
-  { name: "Chapada dos Veadeiros", loc: "Alto Paraíso, GO", lat: -14.13, lng: -47.68, nota: 4.8, n: 278, tipo: "🌿 Trilha" },
-  { name: "Serra da Canastra", loc: "São Roque de Minas, MG", lat: -20.19, lng: -46.50, nota: 4.7, n: 189, tipo: "🏞️ Camping" },
-  { name: "Pedra Azul", loc: "Domingos Martins, ES", lat: -20.41, lng: -41.01, nota: 4.6, n: 142, tipo: "🧗 Escalada" },
-  { name: "Ilhabela", loc: "Ilhabela, SP", lat: -23.78, lng: -45.35, nota: 4.8, n: 203, tipo: "🌊 Praia" },
-  { name: "Parque de Intervales", loc: "Ribeirão Grande, SP", lat: -24.28, lng: -48.41, nota: 4.7, n: 167, tipo: "🌲 Mata Atlântica" },
-  { name: "Cambará do Sul", loc: "Cambará do Sul, RS", lat: -29.04, lng: -50.14, nota: 4.9, n: 221, tipo: "🏔️ Serra Gaúcha" },
-  { name: "Serra Geral", loc: "Praia Grande, SC", lat: -29.18, lng: -49.98, nota: 4.6, n: 134, tipo: "🌿 Trilha" },
-  { name: "Bonito", loc: "Bonito, MS", lat: -21.12, lng: -56.48, nota: 4.8, n: 256, tipo: "🤿 Ecoturismo" },
-  { name: "Lençóis Maranhenses", loc: "Barreirinhas, MA", lat: -2.49, lng: -43.12, nota: 5.0, n: 345, tipo: "🏜️ Dunas" },
-  { name: "Serra do Cipó", loc: "Santana do Riacho, MG", lat: -19.34, lng: -43.58, nota: 4.7, n: 198, tipo: "🌿 Cerrado" },
-  { name: "Parque Estadual Ibitipoca", loc: "Lima Duarte, MG", lat: -21.70, lng: -43.89, nota: 4.6, n: 176, tipo: "🌲 Trilha" },
-  { name: "Paraty", loc: "Paraty, RJ", lat: -23.22, lng: -44.71, nota: 4.7, n: 211, tipo: "🌊 Coastal" },
-  { name: "Arraial do Cabo", loc: "Arraial do Cabo, RJ", lat: -22.96, lng: -42.02, nota: 4.5, n: 149, tipo: "🌊 Praia" },
-  { name: "Serra da Bocaina", loc: "São José do Barreiro, SP", lat: -22.75, lng: -44.60, nota: 4.8, n: 167, tipo: "🌿 Mata" },
-  { name: "Pico da Bandeira", loc: "Caparaó, MG/ES", lat: -20.43, lng: -41.79, nota: 4.9, n: 189, tipo: "🏔️ Montanhismo" },
-  { name: "Praia do Rosa", loc: "Imbituba, SC", lat: -28.12, lng: -48.66, nota: 4.7, n: 152, tipo: "🌊 Praia" },
-  { name: "Pantanal Norte", loc: "Poconé, MT", lat: -16.26, lng: -56.62, nota: 4.8, n: 234, tipo: "🐊 Pantanal" },
-  { name: "Floresta de Brasília", loc: "Brasília, DF", lat: -15.73, lng: -48.18, nota: 4.5, n: 98, tipo: "🌿 Cerrado" },
-  { name: "Pico 31 de Março", loc: "Barcelos, AM", lat: -0.82, lng: -66.75, nota: 4.9, n: 45, tipo: "🏔️ Amazônia" },
-  { name: "Chapada do Araripe", loc: "Crato, CE", lat: -7.23, lng: -39.41, nota: 4.6, n: 112, tipo: "🌿 Caatinga" },
-  { name: "Parque Serra do Tabuleiro", loc: "Paulo Lopes, SC", lat: -27.94, lng: -48.69, nota: 4.7, n: 143, tipo: "🌊 Lagoa" },
-  { name: "Gruta do Lago Azul", loc: "Bonito, MS", lat: -21.17, lng: -56.53, nota: 4.9, n: 187, tipo: "🤿 Gruta" },
-];
-
-const map = L.map('leaflet-map', { zoomControl: true, scrollWheelZoom: false }).setView([-15.5, -52], 4);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>',
-  maxZoom: 18
-}).addTo(map);
-
-const greenIcon = L.divIcon({
-  className: '',
-  html: `<div style="
-    background:#1D9E75;color:white;border-radius:50%;
-    width:32px;height:32px;display:flex;align-items:center;justify-content:center;
-    font-size:14px;font-weight:700;
-    box-shadow:0 3px 10px rgba(29,158,117,.5);
-    border:2px solid white;
-  ">⛺</div>`,
-  iconSize: [32, 32],
-  iconAnchor: [16, 16],
-  popupAnchor: [0, -18]
-});
-
-const markers = L.markerClusterGroup({
-  iconCreateFunction: cluster => L.divIcon({
-    className: '',
-    html: `<div style="
-      background:#1D9E75;color:white;border-radius:50%;
-      width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-      font-size:13px;font-weight:800;
-      box-shadow:0 4px 14px rgba(29,158,117,.4);border:2px solid white;
-    ">${cluster.getChildCount()}</div>`,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20]
-  })
-});
-
-campings.forEach(c => {
-  const stars = '★'.repeat(Math.floor(c.nota)) + (c.nota % 1 ? '½' : '');
-  const m = L.marker([c.lat, c.lng], { icon: greenIcon });
-  m.bindPopup(`
-    <div class="camp-popup">
-      <div class="camp-popup-name">${c.name}</div>
-      <div class="camp-popup-loc">📍 ${c.loc}</div>
-      <div class="camp-popup-stars">${stars} ${c.nota} · ${c.n} avaliações</div>
-      <span class="camp-popup-badge">${c.tipo}</span>
-    </div>
-  `, { maxWidth: 200 });
-  markers.addLayer(m);
-});
-
-map.addLayer(markers);
-
-// ─── SCROLL ANIMATIONS ───────────────────────────────────────────
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// ─── COUNTER ANIMATION ───────────────────────────────────────────
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    entry.target.querySelectorAll('[data-target]').forEach(el => {
-      const target = +el.dataset.target;
-      const suffix = target >= 1000 ? '+' : '';
-      const start = performance.now();
-      const duration = 1800;
-      const animate = now => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(eased * target).toLocaleString('pt-BR') + (progress < 1 ? '' : suffix);
-        if (progress < 1) requestAnimationFrame(animate);
-      };
-      requestAnimationFrame(animate);
-    });
-    counterObserver.unobserve(entry.target);
-  });
-}, { threshold: 0.5 });
-
-const statsSection = document.querySelector('#stats');
-if (statsSection) counterObserver.observe(statsSection);
-
-// ─── CONTACT FORM ────────────────────────────────────────────────
-function handleContactForm(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.textContent = '✅ Mensagem enviada!';
-  btn.style.background = '#155c43';
-  setTimeout(() => {
-    btn.textContent = 'Enviar mensagem →';
-    btn.style.background = '';
-    e.target.reset();
-  }, 3000);
-}
-</script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>

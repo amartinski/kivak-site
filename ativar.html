@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ativar sua conta — KIVAK</title>
+  <link rel="icon" href="assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <style>
+    body { background: linear-gradient(160deg, #0d2b1f 0%, #16382a 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .ativar-card { max-width: 420px; width: 100%; }
+    .ativar-logo { display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 28px; }
+    .step { display: none; }
+    .step.active { display: block; }
+    .success-icon { font-size: 2.6rem; text-align: center; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="ativar-card">
+  <div class="ativar-logo">
+    <svg width="34" height="34" viewBox="0 0 30 30"><rect width="30" height="30" rx="8" fill="#1D9E75"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="15" fill="#fff">K</text></svg>
+    <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.3rem;color:#fff">KIVAK</span>
+  </div>
+
+  <div class="form-card">
+    <!-- Etapa 1: código -->
+    <div class="step active" id="step-codigo">
+      <h3>Ativar sua conta</h3>
+      <p class="form-sub">Digite o código de 8 dígitos que mandamos pro seu e-mail.</p>
+      <form id="form-codigo" novalidate>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="codigo">Código de 8 dígitos</label>
+          <input type="text" id="codigo" name="codigo" required maxlength="8" pattern="[0-9]{8}" style="text-align:center;letter-spacing:.3em;font-weight:700" placeholder="00000000" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Verificar código →</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <!-- Etapa 2: nova senha -->
+    <div class="step" id="step-senha">
+      <h3>Crie sua senha</h3>
+      <p class="form-sub">Mínimo 8 caracteres, com 1 letra maiúscula e 1 número.</p>
+      <form id="form-senha" novalidate>
+        <div class="field">
+          <label for="senha">Nova senha</label>
+          <input type="password" id="senha" name="senha" required minlength="8" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Criar senha e ativar →</button>
+        <div class="form-msg"></div>
+      </form>
+    </div>
+
+    <!-- Etapa 3: sucesso -->
+    <div class="step" id="step-sucesso">
+      <div class="success-icon">🎉</div>
+      <h3 style="text-align:center">Sua conta está pronta!</h3>
+      <p class="form-sub" style="text-align:center">Baixe o app abaixo e faça login com seu e-mail e a senha que você acabou de criar.</p>
+      <a class="btn btn-primary btn-block" id="link-download" href="#">📲 Baixar o KIVAK (Android)</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // TODO: apontar pro APK hospedado de verdade (ex: media.kivak.app/kivak.apk)
+  // assim que decidirem onde ele vai ficar publicamente.
+  const APK_DOWNLOAD_URL = 'assets/kivak.apk';
+
+  const API_BASE = 'https://api.kivak.app/api/v2';
+  const params = new URLSearchParams(window.location.search);
+  const emailParam = params.get('email');
+  if (emailParam) document.getElementById('email').value = emailParam;
+
+  let tokenRedefinicao = '';
+
+  function mostrarEtapa(id) {
+    document.querySelectorAll('.step').forEach((s) => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function setMsg(form, texto, tipo) {
+    const msg = form.querySelector('.form-msg');
+    msg.textContent = texto;
+    msg.className = `form-msg ${tipo}`;
+  }
+
+  document.getElementById('form-codigo').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Verificando...';
+    try {
+      const res = await fetch(`${API_BASE}/auth/verificar-codigo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email.value.trim(), codigo: form.codigo.value.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.erro || 'Código inválido');
+      tokenRedefinicao = data.token;
+      mostrarEtapa('step-senha');
+    } catch (err) {
+      setMsg(form, typeof err.message === 'string' ? err.message : 'Código inválido ou expirado.', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Verificar código →';
+    }
+  });
+
+  document.getElementById('form-senha').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Criando...';
+    try {
+      const res = await fetch(`${API_BASE}/auth/redefinir-senha`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: tokenRedefinicao, novaSenha: form.senha.value }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.erro || 'Não foi possível criar a senha');
+      document.getElementById('link-download').href = APK_DOWNLOAD_URL;
+      mostrarEtapa('step-sucesso');
+    } catch (err) {
+      setMsg(form, typeof err.message === 'string' ? err.message : 'Sessão expirada, peça um novo código.', 'err');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Criar senha e ativar →';
+    }
+  });
+</script>
+</body>
+</html>
