@@ -1,10 +1,23 @@
 # Deploy no minipc (Ubuntu). Site estático servido por nginx, atrás da
-# Cloudflare Tunnel — só loopback, igual aos outros serviços do KIVAK.
+# Cloudflare Tunnel (só loopback, igual aos outros serviços do KIVAK). O blog
+# é um serviço à parte (blog-server.mjs), que o nginx alcança pela rede
+# interna do compose: ele não expõe porta nenhuma no host.
 services:
   site:
     build:
       context: .
     container_name: kivak-site
     restart: unless-stopped
+    depends_on:
+      - blog
     ports:
       - "127.0.0.1:8090:8080"   # só loopback: alcançável pelo cloudflared (kivak.app)
+
+  blog:
+    build:
+      context: .
+      target: blog
+    container_name: kivak-blog
+    restart: unless-stopped
+    environment:
+      API_URL: https://api.kivak.app/api/v2
