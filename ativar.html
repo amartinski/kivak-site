@@ -95,6 +95,17 @@
     msg.className = `form-msg ${tipo}`;
   }
 
+  // A API pode responder com { erro: "texto" } ou, quando é erro de
+  // validação (zod), { erro: { fieldErrors: {...}, formErrors: [...] } } —
+  // sem tratar os dois casos, o segundo virava "[object Object]" na tela.
+  function mensagemDeErro(data, padrao) {
+    if (typeof data?.erro === 'string') return data.erro;
+    const doCampo = Object.values(data?.erro?.fieldErrors ?? {}).flat();
+    if (doCampo.length > 0) return doCampo[0];
+    if (data?.erro?.formErrors?.length > 0) return data.erro.formErrors[0];
+    return padrao;
+  }
+
   document.getElementById('form-codigo').addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -108,7 +119,7 @@
         body: JSON.stringify({ email: form.email.value.trim(), codigo: form.codigo.value.trim() }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.erro || 'Código inválido');
+      if (!res.ok) throw new Error(mensagemDeErro(data, 'Código inválido'));
       tokenRedefinicao = data.token;
       mostrarEtapa('step-senha');
     } catch (err) {
@@ -123,16 +134,21 @@
     e.preventDefault();
     const form = e.target;
     const btn = form.querySelector('button');
+    const senha = form.senha.value;
+    if (senha.length < 8 || !/[A-Z]/.test(senha) || !/[0-9]/.test(senha)) {
+      setMsg(form, 'A senha precisa de 8+ caracteres, 1 letra maiúscula e 1 número.', 'err');
+      return;
+    }
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span> Criando...';
     try {
       const res = await fetch(`${API_BASE}/auth/redefinir-senha`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: tokenRedefinicao, novaSenha: form.senha.value }),
+        body: JSON.stringify({ token: tokenRedefinicao, novaSenha: senha }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.erro || 'Não foi possível criar a senha');
+      if (!res.ok) throw new Error(mensagemDeErro(data, 'Não foi possível criar a senha'));
       document.getElementById('link-download').href = APK_DOWNLOAD_URL;
       mostrarEtapa('step-sucesso');
     } catch (err) {
