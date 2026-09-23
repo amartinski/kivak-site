@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ativar sua conta — KIVAK</title>
+  <title>Ativar sua conta | KIVAK</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="assets/images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,7 +97,7 @@
   }
 
   // A API pode responder com { erro: "texto" } ou, quando é erro de
-  // validação (zod), { erro: { fieldErrors: {...}, formErrors: [...] } } —
+  // validação (zod), { erro: { fieldErrors: {...}, formErrors: [...] } }:
   // sem tratar os dois casos, o segundo virava "[object Object]" na tela.
   function mensagemDeErro(data, padrao) {
     if (typeof data?.erro === 'string') return data.erro;

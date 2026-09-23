@@ -1,11 +1,11 @@
 // Gera o site final em dist/: copia as páginas feitas à mão (index, empresas,
 // ativar), gera o blog e as páginas de conteúdo a partir de conteudo/*.md,
 // monta sitemap.xml e 404.html e troca __CSSVER__/__JSVER__ pelo hash do
-// conteúdo (cache-busting — ver nginx.conf, /assets/ é immutable).
+// conteúdo (cache-busting; ver nginx.conf, /assets/ é immutable).
 //
 // Sem dependências: roda com `node build.mjs` local ou no Dockerfile.
 //
-// Formato dos .md — front matter simples (chave: valor) entre linhas `---`:
+// Formato dos .md: front matter simples (chave: valor) entre linhas `---`:
 //   title, description, date (AAAA-MM-DD), updated (opcional), image
 //   (caminho em /assets/images), imageAlt, category (só blog)
 // Uma seção "## Perguntas frequentes" com "### pergunta" + parágrafos vira
@@ -135,7 +135,7 @@ function layout({ title, description, path, image, type = 'website', schema = []
 <body>
 
 <nav class="site-nav solid always-solid">
-  <a class="nav-logo" href="/" aria-label="KIVAK — início">
+  <a class="nav-logo" href="/" aria-label="KIVAK, página inicial">
     ${LOGO}
   </a>
   <ul class="nav-links">
@@ -300,8 +300,8 @@ ${markdown(p.body)}
 }
 
 writeFileSync(join(OUT, 'blog', 'index.html'), layout({
-  title: 'Blog KIVAK — trilha, camping e aventura no Brasil',
-  description: 'Guias práticos de camping e trilha: o que levar, como escolher camping, como gravar trilha com GPS e mais — escrito por quem vai pro mato.',
+  title: 'Blog KIVAK | Trilha, camping e aventura no Brasil',
+  description: 'Guias práticos de camping e trilha: o que levar, como escolher camping, como gravar trilha com GPS e muito mais, escritos por quem vai pro mato.',
   path: '/blog/',
   schema: [
     { '@context': 'https://schema.org', '@type': 'Blog', name: 'Blog KIVAK', url: `${SITE}/blog/`, publisher: ORG, inLanguage: 'pt-BR' },
@@ -311,7 +311,7 @@ writeFileSync(join(OUT, 'blog', 'index.html'), layout({
   <section class="section-tight"><div class="container">
     ${breadcrumbHtml([['Início', '/'], ['Blog', '/blog/']])}
     <h1 class="title">Blog KIVAK</h1>
-    <p class="sub">Guias práticos de trilha e camping — escritos por quem vai pro mato no fim de semana.</p>
+    <p class="sub">Guias práticos de trilha e camping, escritos por quem vai pro mato no fim de semana.</p>
     <div class="post-grid">${posts.map(card).join('\n')}</div>
   </div></section>
 </main>`,
@@ -329,12 +329,12 @@ ${posts.map((p) => `<item><title>${esc(p.meta.title)}</title><link>${SITE}/blog/
 
 // ─── 404 ──────────────────────────────────────────────────────────
 writeFileSync(join(OUT, '404.html'), layout({
-  title: 'Página não encontrada — KIVAK',
+  title: 'Página não encontrada | KIVAK',
   description: 'Essa trilha não existe (ou mudou de lugar).',
   path: '/404',
   main: `<main class="page-main"><section><div class="container center wrap-narrow">
     <h1 class="title">Essa trilha não existe.</h1>
-    <p class="sub center">A página que você procurou não está aqui — mas o resto do mapa está.</p>
+    <p class="sub center">A página que você procurou não está aqui, mas o resto do mapa continua no lugar.</p>
     <p style="margin-top:28px"><a class="btn btn-primary" href="/">Voltar pro início</a> <a class="btn" href="/blog/">Ler o blog</a></p>
   </div></section></main>`,
 }).replace('<link rel="canonical"', '<meta name="robots" content="noindex" />\n  <link rel="canonical"'));

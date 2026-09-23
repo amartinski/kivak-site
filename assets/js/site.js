@@ -16,7 +16,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 
 // ─── FORMULÁRIO DE ACESSO ANTECIPADO (app e/ou empresa) ─────────
-// Um mesmo form pode ou não ter seletor de plataforma (Android/iOS) —
+// Um mesmo form pode ou não ter seletor de plataforma (Android/iOS);
 // a página Empresas não tem, porque não se aplica a anunciante.
 const form = document.getElementById('form-acesso');
 if (form) {
@@ -70,7 +70,7 @@ if (form) {
         msg.textContent = 'Recebemos seu contato! Alguém do time KIVAK te retorna em breve.';
       } else {
         msg.textContent = plataforma.value === 'ios'
-          ? 'Cadastrado! O KIVAK ainda não está na App Store — avisamos assim que sair.'
+          ? 'Cadastrado! O KIVAK ainda não está na App Store. Avisamos assim que sair.'
           : 'Cadastrado! Fique de olho no seu e-mail: avisamos assim que seu acesso for liberado.';
       }
       msg.className = 'form-msg ok';
