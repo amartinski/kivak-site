@@ -27,8 +27,7 @@
     <li><a href="empresas.html" class="active">Empresas</a></li>
   </ul>
   <div class="nav-right">
-    <a class="btn btn-ghost-light btn-sm" href="https://mkt.kivak.app/login">Painel de anunciante</a>
-    <a class="btn btn-primary btn-sm" href="mailto:kivak.app@gmail.com?subject=Quero%20anunciar%20no%20KIVAK">Fale com a gente</a>
+    <a class="btn btn-primary btn-sm" href="#contato">Quero anunciar</a>
   </div>
 </nav>
 
@@ -39,8 +38,8 @@
     <h1>Seu público não está<br/>rolando o feed. Está<br/><em>subindo a serra.</em></h1>
     <p class="lede">Você vende barraca, bota, mochila, seguro viagem, pousada. Hoje você anuncia pra uma audiência montada por proxy de interesse. No KIVAK, não existe proxy — só comportamento real, verificado por GPS.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="mailto:kivak.app@gmail.com?subject=Quero%20anunciar%20no%20KIVAK">Falar com a gente</a>
-      <a class="btn btn-ghost-light" href="https://mkt.kivak.app/login">Já sou anunciante</a>
+      <a class="btn btn-primary" href="#contato">Quero anunciar no KIVAK</a>
+      <a class="btn btn-ghost-light" href="mailto:kivak.app@gmail.com?subject=Quero%20anunciar%20no%20KIVAK">Prefiro falar por e-mail</a>
     </div>
   </div>
 </header>
@@ -128,13 +127,30 @@
   </div>
 </section>
 
-<!-- ─── CTA FINAL ───────────────────────────────────────────────── -->
-<section id="baixar" style="padding-top:80px;padding-bottom:100px">
-  <div class="container">
-    <div class="form-card center wrap-narrow fade-in" style="padding:48px">
-      <h3 style="font-size:1.5rem;margin-bottom:10px">Fale com a gente antes que o inventário encha</h3>
-      <p class="form-sub" style="margin-bottom:26px">Estamos abrindo o KIVAK ADS para um grupo inicial de anunciantes fundadores, com condições que não vão se repetir.</p>
-      <a class="btn btn-primary btn-block" href="mailto:kivak.app@gmail.com?subject=Quero%20anunciar%20no%20KIVAK">Quero anunciar no KIVAK →</a>
+<!-- ─── CTA FINAL / FORMULÁRIO ──────────────────────────────────── -->
+<section id="contato" class="cta-dark">
+  <div class="container download-grid">
+    <div class="download-copy fade-in">
+      <span class="eyebrow">Fale com a gente</span>
+      <h2 class="title">Antes que o inventário encha.</h2>
+      <p class="sub">Estamos abrindo o KIVAK ADS para um grupo inicial de anunciantes fundadores, com condições que não vão se repetir. Deixe seu contato que o time KIVAK te retorna — sem cadastro direto no painel por aqui.</p>
+    </div>
+    <div class="form-card fade-in">
+      <h3>Quero anunciar no KIVAK</h3>
+      <p class="form-sub">Alguém do time entra em contato pra liberar seu acesso ao painel.</p>
+      <form id="form-acesso" novalidate>
+        <input type="hidden" name="tipo" value="anunciante" />
+        <div class="field">
+          <label for="nome">Seu nome</label>
+          <input type="text" id="nome" name="nome" required minlength="2" placeholder="Como podemos te chamar" />
+        </div>
+        <div class="field">
+          <label for="email">E-mail profissional</label>
+          <input type="email" id="email" name="email" required placeholder="voce@empresa.com" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Quero anunciar →</button>
+        <div class="form-msg"></div>
+      </form>
     </div>
   </div>
 </section>
@@ -160,8 +176,8 @@
       </div>
       <div class="footer-col">
         <h5>Negócios</h5>
+        <a href="#contato">Quero anunciar</a>
         <a href="mailto:kivak.app@gmail.com">Fale com a gente</a>
-        <a href="https://mkt.kivak.app/login">Painel de anunciante</a>
       </div>
     </div>
     <div class="footer-bottom">

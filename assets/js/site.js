@@ -14,7 +14,9 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 
-// ─── FORMULÁRIO DE ACESSO ANTECIPADO ────────────────────────────
+// ─── FORMULÁRIO DE ACESSO ANTECIPADO (app e/ou empresa) ─────────
+// Um mesmo form pode ou não ter seletor de plataforma (Android/iOS) —
+// a página Empresas não tem, porque não se aplica a anunciante.
 const form = document.getElementById('form-acesso');
 if (form) {
   const options = form.querySelectorAll('.platform-option');
@@ -31,11 +33,13 @@ if (form) {
     const msg = form.querySelector('.form-msg');
     const btn = form.querySelector('button[type="submit"]');
     const plataforma = form.querySelector('input[name="plataforma"]:checked');
+    const tipoInput = form.querySelector('input[name="tipo"]');
+    const tipo = tipoInput ? tipoInput.value : 'app';
 
     msg.className = 'form-msg';
     msg.textContent = '';
 
-    if (!plataforma) {
+    if (options.length > 0 && !plataforma) {
       msg.textContent = 'Escolha se você usa Android ou iOS.';
       msg.className = 'form-msg err';
       return;
@@ -52,13 +56,22 @@ if (form) {
       const res = await fetch(`${API_BASE}/acesso-antecipado`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, plataforma: plataforma.value }),
+        body: JSON.stringify({
+          nome,
+          email,
+          tipo,
+          ...(plataforma ? { plataforma: plataforma.value } : {}),
+        }),
       });
       if (!res.ok) throw new Error('erro');
 
-      msg.textContent = plataforma.value === 'ios'
-        ? 'Cadastrado! O KIVAK ainda não está na App Store — avisamos assim que sair.'
-        : 'Cadastrado! Fique de olho no seu e-mail: avisamos assim que seu acesso for liberado.';
+      if (tipo === 'anunciante') {
+        msg.textContent = 'Recebemos seu contato! Alguém do time KIVAK te retorna em breve.';
+      } else {
+        msg.textContent = plataforma.value === 'ios'
+          ? 'Cadastrado! O KIVAK ainda não está na App Store — avisamos assim que sair.'
+          : 'Cadastrado! Fique de olho no seu e-mail: avisamos assim que seu acesso for liberado.';
+      }
       msg.className = 'form-msg ok';
       form.reset();
       options.forEach((o) => o.classList.remove('selected'));

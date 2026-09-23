@@ -195,7 +195,7 @@ p.sub { color: var(--muted); font-size: 1.05rem; line-height: 1.7; max-width: 62
 }
 
 /* ─── DOWNLOAD FORM ──────────────────────────────────────────────── */
-#baixar { background: linear-gradient(160deg, #0d2b1f 0%, #16382a 100%); color: var(--white); }
+.cta-dark { background: linear-gradient(160deg, #0d2b1f 0%, #16382a 100%); color: var(--white); }
 .download-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 60px; align-items: center; }
 .download-copy h2 { color: var(--white); }
 .download-copy p.sub { color: rgba(255,255,255,.65); }
