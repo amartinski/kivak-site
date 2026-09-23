@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KIVAK — O mapa acaba onde a sua perna começa</title>
-  <meta name="description" content="KIVAK é a rede social de trilha, camping e aventura feita no Brasil, pra trilha brasileira. Grave suas trilhas com GPS de verdade, descubra campings avaliados por quem esteve lá e organize saídas com comunidades de verdade." />
+  <title>KIVAK — App de trilha e camping | Rede social de aventura</title>
+  <meta name="description" content="KIVAK é o app de trilha e camping feito no Brasil: grave trilhas com GPS de verdade, encontre campings avaliados por quem dormiu lá e organize saídas com comunidades de aventura." />
   <link rel="canonical" href="https://kivak.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="KIVAK" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:url" content="https://kivak.app/" />
-  <meta property="og:title" content="KIVAK — O mapa acaba onde a sua perna começa" />
-  <meta property="og:description" content="KIVAK é a rede social de trilha, camping e aventura feita no Brasil, pra trilha brasileira. Grave suas trilhas com GPS de verdade, descubra campings avaliados por quem esteve lá e organize saídas com comunidades de verdade." />
+  <meta property="og:title" content="KIVAK — App de trilha e camping | Rede social de aventura" />
+  <meta property="og:description" content="KIVAK é o app de trilha e camping feito no Brasil: grave trilhas com GPS de verdade, encontre campings avaliados por quem dormiu lá e organize saídas com comunidades de aventura." />
   <meta property="og:image" content="https://kivak.app/assets/images/hero-trilheiro.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <link rel="alternate" type="application/rss+xml" title="Blog KIVAK" href="https://kivak.app/blog/feed.xml" />
   <link rel="icon" href="assets/images/favicon.png" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://kivak.app/#org", "name": "KIVAK", "url": "https://kivak.app/", "logo": "https://kivak.app/assets/images/favicon.png", "email": "kivak.app@gmail.com"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "@id": "https://kivak.app/#site", "name": "KIVAK", "url": "https://kivak.app/", "inLanguage": "pt-BR", "publisher": {"@id": "https://kivak.app/#org"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "KIVAK", "operatingSystem": "Android", "applicationCategory": "TravelApplication", "url": "https://kivak.app/", "inLanguage": "pt-BR", "description": "App de trilha e camping: gravação de trilhas com GPS, campings avaliados pela comunidade, comunidades e eventos de aventura.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "BRL"}, "publisher": {"@id": "https://kivak.app/#org"}}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
@@ -33,10 +37,11 @@
   <ul class="nav-links">
     <li><a href="#recursos">Recursos</a></li>
     <li><a href="#comunidades">Comunidades</a></li>
-    <li><a href="empresas.html">Empresas</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/empresas">Empresas</a></li>
   </ul>
   <div class="nav-right">
-    <a class="btn btn-ghost-light btn-sm" href="empresas.html">Sou empresa</a>
+    <a class="btn btn-ghost-light btn-sm" href="/empresas">Sou empresa</a>
     <a class="btn btn-primary btn-sm" href="#baixar">Baixar o app</a>
   </div>
 </nav>
@@ -44,12 +49,12 @@
 <!-- ─── HERO ────────────────────────────────────────────────────── -->
 <header class="hero" id="hero" style="background-image:url('assets/images/hero-trilheiro.jpg')">
   <div class="container hero-content fade-in visible">
-    <span class="hero-eyebrow">🥾 Feito no Brasil, pra trilha brasileira</span>
+    <span class="hero-eyebrow">🥾 App de trilha e camping · Feito no Brasil</span>
     <h1>O mapa acaba<br/>onde a sua <em>perna</em><br/>começa.</h1>
     <p class="lede">KIVAK é a rede social de quem sai de casa pra valer: trilha com GPS de verdade, campings avaliados por quem dormiu lá, e comunidades que organizam a saída — não só conversam sobre ela.</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#baixar">📲 Quero baixar</a>
-      <a class="btn btn-ghost-light" href="empresas.html">💼 Sou uma empresa</a>
+      <a class="btn btn-ghost-light" href="/empresas">💼 Sou uma empresa</a>
     </div>
   </div>
 </header>
@@ -136,6 +141,19 @@
   </div>
 </section>
 
+<!-- ─── DO BLOG (preenchido pelo build.mjs) ─────────────────────── -->
+<section id="blog">
+  <div class="container">
+    <div class="center wrap-narrow fade-in">
+      <span class="eyebrow" style="display:block;text-align:center">Do blog</span>
+      <h2 class="title">Guias pra sair de casa melhor preparado.</h2>
+      <p class="sub center">Checklist de camping, primeira trilha, como gravar trilha com GPS no celular — o que a gente gostaria de ter lido antes.</p>
+    </div>
+    <!--BLOG_RECENTES-->
+    <p class="center" style="margin-top:32px"><a class="btn btn-primary" href="/blog/">Ver todos os artigos →</a></p>
+  </div>
+</section>
+
 <!-- ─── DOWNLOAD / LISTA DE ESPERA ──────────────────────────────── -->
 <section id="baixar" class="cta-dark">
   <div class="container download-grid">
@@ -179,7 +197,7 @@
 <!-- ─── FOOTER ──────────────────────────────────────────────────── -->
 <footer>
   <div class="container">
-    <div class="footer-grid">
+    <div class="footer-grid footer-grid-4">
       <div class="footer-brand">
         <svg viewBox="0 0 728 170" xmlns="http://www.w3.org/2000/svg" style="height:26px;fill-rule:evenodd;clip-rule:evenodd">
           <g>
@@ -188,7 +206,7 @@
             <path d="M697.456,0.109l-64.035,68.898l0,34.5l8,-8l55.965,74.085l30.5,0l-66.965,-93.085l66.965,-76.398l-30.43,0Zm-103.946,0l-1.592,169.484l27.411,0l-0.586,-169.484l-25.233,0Zm-198.589,-0.102l-44.695,46.597l-22.805,58.403l13,37.5l54.5,-142.5Zm-151.5,0.102l63.24,169.484l28.518,-0l-46.147,-122.988l-45.611,-46.495Zm-143.955,0l-57.045,68.898l0,34.5l8,-8l53.072,74.085l35.572,0l-69.145,-92.085l0,-4.5l58.217,-72.898l-28.672,0Zm-99.453,-0l-0,169.484l26.5,0l0.407,-169.484l-26.907,-0Z" style="fill:none;stroke:#aaa;stroke-width:5px;"/>
           </g>
         </svg>
-        <p>Rede social de trilha, camping e aventura. Feito no Brasil, pra trilha brasileira.</p>
+        <p>App de trilha e camping: rede social de aventura feita no Brasil, pra trilha brasileira.</p>
       </div>
       <div class="footer-col">
         <h5>KIVAK</h5>
@@ -197,8 +215,15 @@
         <a href="#baixar">Baixar o app</a>
       </div>
       <div class="footer-col">
+        <h5>Guias</h5>
+        <a href="/app-de-trilha">App de trilha</a>
+        <a href="/app-de-camping">App de camping</a>
+        <a href="/alternativas">Alternativas</a>
+        <a href="/blog/">Blog</a>
+      </div>
+      <div class="footer-col">
         <h5>Negócios</h5>
-        <a href="empresas.html">Anuncie no KIVAK</a>
+        <a href="/empresas">Anuncie no KIVAK</a>
       </div>
     </div>
     <div class="footer-bottom">

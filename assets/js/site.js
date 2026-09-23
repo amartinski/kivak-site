@@ -2,7 +2,8 @@ const API_BASE = 'https://api.kivak.app/api/v2';
 
 // ─── NAV: sólido ao rolar ───────────────────────────────────────
 const nav = document.querySelector('.site-nav');
-if (nav) {
+// Páginas sem hero (blog, conteúdo) marcam a nav como always-solid.
+if (nav && !nav.classList.contains('always-solid')) {
   const onScroll = () => nav.classList.toggle('solid', window.scrollY > 40);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
