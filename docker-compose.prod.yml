@@ -7,4 +7,4 @@ services:
     container_name: kivak-site
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8090:80"   # só loopback: alcançável pelo cloudflared (kivak.app)
+      - "127.0.0.1:8090:8080"   # só loopback: alcançável pelo cloudflared (kivak.app)
