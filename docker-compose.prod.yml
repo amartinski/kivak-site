@@ -1,0 +1,10 @@
+# Deploy no minipc (Ubuntu). Site estático servido por nginx, atrás da
+# Cloudflare Tunnel — só loopback, igual aos outros serviços do KIVAK.
+services:
+  site:
+    build:
+      context: .
+    container_name: kivak-site
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8090:80"   # só loopback: alcançável pelo cloudflared (kivak.app)
