@@ -9,6 +9,27 @@ if (nav && !nav.classList.contains('always-solid')) {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
+// ─── MENU DO CELULAR ────────────────────────────────────────────
+const burger = document.querySelector('.nav-burger');
+if (nav && burger) {
+  const fechar = () => {
+    nav.classList.remove('menu-aberto');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Abrir menu');
+  };
+  burger.addEventListener('click', () => {
+    const abrir = !nav.classList.contains('menu-aberto');
+    nav.classList.toggle('menu-aberto', abrir);
+    burger.setAttribute('aria-expanded', String(abrir));
+    burger.setAttribute('aria-label', abrir ? 'Fechar menu' : 'Abrir menu');
+  });
+  // Links de âncora (#recursos, #baixar...) ficam na mesma página: fecha o menu ao tocar.
+  nav.querySelectorAll('.nav-menu a').forEach((a) => a.addEventListener('click', fechar));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fechar(); });
+  document.addEventListener('click', (e) => { if (!nav.contains(e.target)) fechar(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 720) fechar(); });
+}
+
 // ─── ANIMAÇÃO DE ENTRADA AO ROLAR ───────────────────────────────
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });

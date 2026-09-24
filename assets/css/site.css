@@ -83,7 +83,17 @@ button { font-family: inherit; }
 .btn-block { width: 100%; }
 .btn:disabled { opacity: .6; cursor: not-allowed; transform: none !important; }
 
-.nav-burger { display: none; }
+.nav-menu { display: contents; }
+.nav-burger {
+  display: none; width: 44px; height: 44px; margin-right: -10px; padding: 12px 10px;
+  background: none; border: none; cursor: pointer; color: var(--white);
+  flex-direction: column; justify-content: space-between;
+}
+.nav-burger span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform .25s ease, opacity .2s ease; }
+.site-nav.solid .nav-burger { color: var(--ink); }
+.site-nav.menu-aberto .nav-burger span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.site-nav.menu-aberto .nav-burger span:nth-child(2) { opacity: 0; }
+.site-nav.menu-aberto .nav-burger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
 /* ─── HERO ─────────────────────────────────────────────────────── */
 .hero {
@@ -325,8 +335,31 @@ footer { background: var(--ink); color: rgba(255,255,255,.6); padding: 64px 0 28
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 720px) {
-  .site-nav { padding: 16px 20px; }
-  .nav-links { display: none; }
+  .site-nav, .site-nav.solid { padding: 12px 20px; }
+  .so-desktop { display: none; }
+
+  /* Menu do celular: links e botões do cabeçalho viram um painel abaixo da barra */
+  .nav-burger { display: flex; }
+  .nav-menu {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; gap: 20px; padding: 8px 20px 24px;
+    background: var(--white); box-shadow: 0 16px 30px rgba(14,21,18,.14);
+    max-height: calc(100vh - 68px); overflow-y: auto;
+  }
+  .site-nav.menu-aberto { background: var(--white); box-shadow: 0 1px 0 var(--border); }
+  .site-nav.menu-aberto .nav-logo { color: var(--ink); }
+  .site-nav.menu-aberto .nav-burger { color: var(--ink); }
+  .site-nav.menu-aberto .nav-menu { display: flex; }
+  .nav-menu .nav-links { flex-direction: column; align-items: stretch; gap: 0; }
+  .nav-menu .nav-links a {
+    display: block; padding: 15px 0; font-size: 1.05rem; color: var(--ink);
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav.solid .nav-menu .nav-links a, .nav-menu .nav-links a { color: var(--ink); }
+  .nav-menu .nav-links a.active { color: var(--green); }
+  .nav-menu .nav-right { flex-direction: column; align-items: stretch; gap: 10px; }
+  .nav-menu .nav-right .btn { width: 100%; padding: 14px 20px; font-size: .95rem; }
+  .nav-menu .btn-ghost-light { background: transparent; color: var(--text); border-color: var(--border); }
   .hero { padding: 120px 0 60px; min-height: 80vh; }
   section { padding: 64px 0; }
   .card-grid { grid-template-columns: 1fr; }

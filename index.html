@@ -34,22 +34,27 @@
       <path d="M697.456,0.109l-64.035,68.898l0,34.5l8,-8l55.965,74.085l30.5,0l-66.965,-93.085l66.965,-76.398l-30.43,0Zm-103.946,0l-1.592,169.484l27.411,0l-0.586,-169.484l-25.233,0Zm-198.589,-0.102l-44.695,46.597l-22.805,58.403l13,37.5l54.5,-142.5Zm-151.5,0.102l63.24,169.484l28.518,-0l-46.147,-122.988l-45.611,-46.495Zm-143.955,0l-57.045,68.898l0,34.5l8,-8l53.072,74.085l35.572,0l-69.145,-92.085l0,-4.5l58.217,-72.898l-28.672,0Zm-99.453,-0l-0,169.484l26.5,0l0.407,-169.484l-26.907,-0Z" style="fill:none;stroke:currentColor;stroke-width:5px;"/>
     </svg>
   </a>
-  <ul class="nav-links">
-    <li><a href="#recursos">Recursos</a></li>
-    <li><a href="#comunidades">Comunidades</a></li>
-    <li><a href="/blog/">Blog</a></li>
-    <li><a href="/empresas">Empresas</a></li>
-  </ul>
-  <div class="nav-right">
-    <a class="btn btn-ghost-light btn-sm" href="/empresas">Sou empresa</a>
-    <a class="btn btn-primary btn-sm" href="#baixar">Baixar o app</a>
+  <div class="nav-menu" id="menu-principal">
+    <ul class="nav-links">
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#comunidades">Comunidades</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/empresas">Empresas</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="btn btn-ghost-light btn-sm" href="/empresas">Sou empresa</a>
+      <a class="btn btn-primary btn-sm" href="#baixar">Baixar o app</a>
+    </div>
   </div>
+  <button class="nav-burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ─── HERO ────────────────────────────────────────────────────── -->
 <header class="hero" id="hero" style="background-image:url('assets/images/hero-trilheiro.jpg')">
   <div class="container hero-content fade-in visible">
-    <span class="hero-eyebrow">🥾 App de trilha e camping · Feito no Brasil</span>
+    <span class="hero-eyebrow">🥾 App de trilha e camping<span class="so-desktop"> · Feito no Brasil</span></span>
     <h1>O mapa acaba<br/>onde a sua <em>perna</em><br/>começa.</h1>
     <p class="lede">KIVAK é a rede social de quem sai de casa pra valer: trilha com GPS de verdade, campings avaliados por quem dormiu lá e comunidades que organizam a saída, em vez de só conversar sobre ela.</p>
     <div class="hero-actions">
