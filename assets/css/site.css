@@ -84,6 +84,14 @@ button { font-family: inherit; }
 .btn:disabled { opacity: .6; cursor: not-allowed; transform: none !important; }
 
 .nav-menu { display: contents; }
+/* Entrar na plataforma web: no computador vai junto dos botões (nav-right);
+   no celular fica fora do menu, ao lado do hambúrguer, sempre visível. */
+.nav-entrar {
+  display: none; margin-left: auto; margin-right: 10px; padding: 7px 14px;
+  border-radius: 999px; border: 1.5px solid rgba(255,255,255,.45);
+  color: var(--white); font-weight: 700; font-size: .85rem; text-decoration: none;
+}
+.site-nav.solid .nav-entrar, .site-nav.menu-aberto .nav-entrar { color: var(--ink); border-color: var(--border); }
 .nav-burger {
   display: none; width: 44px; height: 44px; margin-right: -10px; padding: 12px 10px;
   background: none; border: none; cursor: pointer; color: var(--white);
@@ -340,6 +348,7 @@ footer { background: var(--ink); color: rgba(255,255,255,.6); padding: 64px 0 28
 
   /* Menu do celular: links e botões do cabeçalho viram um painel abaixo da barra */
   .nav-burger { display: flex; }
+  .nav-entrar { display: inline-flex; }
   .nav-menu {
     display: none; position: absolute; top: 100%; left: 0; right: 0;
     flex-direction: column; gap: 20px; padding: 8px 20px 16px;
