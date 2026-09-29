@@ -1,5 +1,6 @@
 // Gera a parte estática do site em dist/: copia as páginas feitas à mão
-// (index, empresas, ativar), gera as páginas de conteudo/paginas/*.md, o
+// (index, empresas, ativar), gera as páginas de conteudo/paginas/*.md e as
+// legais de conteudo/legal/*.md (termos, privacidade, diretrizes, publicidade), o
 // 404.html e um sitemap.xml de reserva, e troca __CSSVER__/__JSVER__ pelo
 // hash do conteúdo (cache-busting; ver nginx.conf, /assets/ é immutable).
 //
@@ -19,7 +20,7 @@ import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } f
 import { join } from 'node:path';
 import {
   SITE, esc, slugify, layout, pagina404, sitemapXml, breadcrumbHtml, crumbs, faqSchema, ORG, CTA,
-  versoes, aplicarVersoes,
+  versoes, aplicarVersoes, dataBR, LEGAIS,
 } from './lib/site.mjs';
 
 const OUT = 'dist';
@@ -31,7 +32,7 @@ function inline(s) {
   return esc(s)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/\[(.+?)\]\((.+?)\)/g, (_, t, href) => {
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, href) => {
       const ext = /^https?:/.test(href) && !href.startsWith(SITE);
       return `<a href="${href}"${ext ? ' rel="noopener" target="_blank"' : ''}>${t}</a>`;
     });
@@ -134,6 +135,46 @@ ${markdown(body)}
     main,
   }));
   rotas.push({ path, lastmod: meta.updated || meta.date });
+}
+
+// ─── Páginas legais (conteudo/legal/*.md → /<slug>) ───────────────
+// Termos, privacidade, diretrizes e publicidade: exigidos pela App Store e
+// pelo Google Play. Front matter extra: vigencia (AAAA-MM-DD) e versao.
+// Trechos "[PREENCHER: ...]" são dados que ainda faltam e saem destacados na
+// página, pra ninguém publicar sem ver.
+const marcarPendencias = (html) => html.replace(/\[PREENCHER:[^\]]*\]/g, (m) => `<mark class="preencher">${m}</mark>`);
+
+for (const [path, nome] of LEGAIS) {
+  const slug = path.slice(1);
+  const { meta, body } = parse(join('conteudo/legal', `${slug}.md`));
+  for (const k of ['vigencia', 'updated', 'versao']) if (!meta[k]) throw new Error(`${slug}.md: falta "${k}"`);
+  const trail = [['Início', '/'], [nome, path]];
+  const secoes = [...body.matchAll(/^## (.+)$/gm)].map((m) => m[1].trim());
+  const main = `<main class="page-main">
+  <article class="container wrap-prose prose legal">
+    ${breadcrumbHtml(trail)}
+    <span class="post-meta">Documento legal · Versão ${esc(meta.versao)}</span>
+    <h1>${inline(meta.h1 || meta.title)}</h1>
+    <p class="lede">${inline(meta.description)}</p>
+    <p class="legal-vigencia"><strong>Este texto vale a partir de ${dataBR(meta.vigencia)}.</strong> Última atualização: ${dataBR(meta.updated)}. Ele substitui qualquer versão anterior.</p>
+    <nav class="legal-docs" aria-label="Documentos legais">${LEGAIS
+      .map(([h, n]) => `<a href="${h}"${h === path ? ' aria-current="page"' : ''}>${n}</a>`).join('')}</nav>
+    <nav class="legal-toc" aria-label="Nesta página">
+      <p class="legal-toc-titulo">Nesta página</p>
+      <ul>${secoes.map((t) => `<li><a href="#${slugify(t)}">${inline(t)}</a></li>`).join('')}</ul>
+    </nav>
+${marcarPendencias(markdown(body))}
+  </article>
+</main>`;
+  writeFileSync(join(OUT, `${slug}.html`), layout({
+    title: meta.title, description: meta.description, path,
+    schema: [
+      { '@context': 'https://schema.org', '@type': 'WebPage', name: meta.title, description: meta.description, url: SITE + path, dateModified: meta.updated, publisher: ORG, inLanguage: 'pt-BR' },
+      crumbs(trail),
+    ],
+    main,
+  }));
+  rotas.push({ path, lastmod: meta.updated });
 }
 
 writeFileSync(join(OUT, '404.html'), pagina404());
