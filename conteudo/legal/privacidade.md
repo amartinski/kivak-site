@@ -2,15 +2,15 @@
 title: Política de Privacidade | KIVAK
 h1: Política de Privacidade
 description: Quais dados o KIVAK coleta, para que usa, onde eles ficam, com quem são compartilhados e como você exerce os seus direitos pela LGPD, inclusive a exclusão da conta.
-vigencia: 2026-09-29
-updated: 2026-09-29
-versao: 2.0
+vigencia: 2026-10-01
+updated: 2026-10-01
+versao: 2.1
 ---
 ## 1. Quem cuida dos seus dados
 
-O controlador dos seus dados pessoais é **[PREENCHER: razão social]**, inscrita no CNPJ sob o nº **[PREENCHER: CNPJ]**, com sede em **[PREENCHER: endereço completo da sede]**, que opera o KIVAK.
+O KIVAK é um projeto independente, ainda sem empresa aberta. O controlador dos seus dados pessoais é **Alan Martinski**, pessoa física, de Camboriú/SC, que criou e mantém o KIVAK.
 
-Nosso encarregado pelo tratamento de dados pessoais (DPO) é **[PREENCHER: nome do encarregado]**, e você fala com ele pelo e-mail [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
+Como agente de tratamento de pequeno porte, o KIVAK não é obrigado a indicar um encarregado (Resolução CD/ANPD nº 2/2022). O canal para qualquer assunto sobre os seus dados é o próprio controlador, pelo e-mail [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
 
 Esta Política segue a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018) e o Marco Civil da Internet (Lei nº 12.965/2014). Ela vale para o aplicativo KIVAK, para a versão web em [platform.kivak.app](https://platform.kivak.app), para o painel [KIVAK Business](https://business.kivak.app) e para o site [kivak.app](https://kivak.app).
 
@@ -151,7 +151,7 @@ Alguns dos serviços da seção 7.2 ficam fora do Brasil (Estados Unidos, Franç
 <tbody>
 <tr><td>Dados da conta e conteúdo publicado</td><td>Enquanto a conta existir, ou até você apagar o conteúdo</td></tr>
 <tr><td>Histórias</td><td>Apagadas, com o arquivo, depois de 24 horas</td></tr>
-<tr><td>Dados de uma conta excluída</td><td>A conta sai do ar na hora. A remoção definitiva dos dados pessoais é feita pela equipe em até 30 dias, exceto os registros que a lei nos obriga a guardar</td></tr>
+<tr><td>Dados de uma conta excluída</td><td>A conta sai do ar na hora. Em até 30 dias, os dados pessoais são removidos e a conta fica anônima, exceto os registros que a lei nos obriga a guardar. Trilhas e avaliações continuam publicadas como "Conta excluída"</td></tr>
 <tr><td>Registro de acesso (IP, data e hora)</td><td>Pelo menos 6 meses, como exige o Marco Civil da Internet</td></tr>
 <tr><td>Denúncias e decisões de moderação</td><td>Enquanto forem necessárias para a segurança da comunidade e para eventual defesa em processo</td></tr>
 <tr><td>Cópias de segurança</td><td>Os dados podem continuar nas cópias criptografadas até serem substituídos no ciclo normal de backup</td></tr>
@@ -184,13 +184,15 @@ Você pode excluir a sua conta a qualquer momento:
 O que acontece, em duas etapas:
 
 1. **Na hora:** a conta sai do ar. Seu perfil e o seu conteúdo deixam de aparecer para as outras pessoas, todas as suas sessões são encerradas e as conexões do chat são fechadas. Se você tinha uma Página no KIVAK Business, ela e o ponto dela no mapa também saem do ar.
-2. **Em até 30 dias:** a exclusão abre um pedido para a nossa equipe, que conclui a remoção definitiva dos seus dados pessoais do banco de dados e dos arquivos de mídia.
+2. **Em até 30 dias:** a exclusão abre um pedido para a nossa equipe, que remove os seus dados pessoais do banco de dados e dos arquivos de mídia: nome, e-mail, nome de usuário, foto, bio, cidade, histórias, amizades e notificações. A conta passa a ser anônima e o seu e-mail fica livre para um cadastro novo.
+
+As **trilhas e avaliações** de locais e trilhas que você publicou continuam no KIVAK, porque ajudam outras pessoas a se planejar, mas aparecem assinadas apenas por "Conta excluída", sem nada que identifique você. Publicações, reels, comentários e mensagens ficam fora do ar. Se preferir que as suas trilhas e avaliações também saiam, apague-as antes de excluir a conta ou peça pelo e-mail [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
 
 Alguns registros podem ser guardados pelo tempo que a lei exige mesmo depois disso, como o registro de acesso (IP, data e hora), que o Marco Civil da Internet manda guardar por 6 meses, e o que for necessário para cumprir obrigação legal ou defender direitos em processo. As cópias de segurança criptografadas são substituídas no ciclo normal de backup.
 
 ## 12. Crianças e adolescentes
 
-O KIVAK não é para menores de 13 anos. Quem tem entre 13 e 17 anos precisa da autorização do pai, mãe ou responsável legal. Se descobrirmos que uma criança menor de 13 anos criou uma conta, excluímos a conta e os dados. Se você é responsável por um menor e acha que isso aconteceu, escreva para [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
+O KIVAK é só para maiores de 18 anos, e quem cria a conta declara ter 18 anos ou mais. Não coletamos de propósito dados de crianças e adolescentes. Se descobrirmos que uma pessoa menor de 18 anos criou uma conta, excluímos a conta e os dados. Se você é responsável por um menor e acha que isso aconteceu, escreva para [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
 
 ## 13. Segurança
 
@@ -215,4 +217,4 @@ Podemos atualizar esta Política. Quando a mudança for relevante, avisamos no a
 
 ## 16. Contato
 
-Encarregado de dados e qualquer dúvida sobre privacidade: [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
+Qualquer dúvida sobre privacidade ou sobre os seus dados: [kivak.app@gmail.com](mailto:kivak.app@gmail.com).

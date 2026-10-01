@@ -2,9 +2,9 @@
 title: Política de Publicidade | KIVAK
 h1: Política de Publicidade
 description: Como a publicidade funciona no KIVAK: anúncios do KIVAK Business, links de afiliados da Amazon e da Shopee, como identificar cada um, quais dados são usados e as regras para anunciantes.
-vigencia: 2026-09-29
-updated: 2026-09-29
-versao: 2.0
+vigencia: 2026-10-01
+updated: 2026-10-01
+versao: 2.1
 ---
 ## 1. Como o KIVAK se sustenta
 
@@ -87,7 +87,7 @@ O anunciante responde pelo conteúdo dos seus anúncios, pelas ofertas que faz e
 
 ## 6. Contratação e pagamento
 
-A campanha é criada no painel do KIVAK Business, com orçamento mínimo de R$ 50,00. O custo varia por posição e é calculado por mil exibições (CPM); o painel mostra a estimativa de alcance antes de você enviar a campanha. A forma de pagamento é **[PREENCHER: forma de pagamento, emissão de nota fiscal e política de reembolso dos anúncios]**.
+A campanha é criada no painel do KIVAK Business, com orçamento mínimo de R$ 50,00. O custo varia por posição e é calculado por mil exibições (CPM); o painel mostra a estimativa de alcance antes de você enviar a campanha. Por enquanto, o painel não faz nenhuma cobrança: antes de uma campanha entrar no ar, a forma de pagamento e o valor são combinados diretamente com o KIVAK pelo e-mail [kivak.app@gmail.com](mailto:kivak.app@gmail.com), e nada é cobrado sem esse acordo. Quando o pagamento passar a ser feito pelo painel, esta Política será atualizada com as regras de cobrança, nota fiscal e reembolso.
 
 ## 7. Independência
 
@@ -101,7 +101,7 @@ Nenhuma avaliação pode ser comprada, e contratar anúncio não dá à Página 
 
 ## 8. Crianças e adolescentes
 
-Como os anúncios não são personalizados, nenhum adolescente recebe publicidade direcionada ao seu perfil. Além disso, anúncios dirigidos a crianças e de produtos proibidos para menores não são aceitos (veja a seção 5.4).
+O KIVAK é só para maiores de 18 anos, e os anúncios não são personalizados. Mesmo assim, anúncios dirigidos a crianças e adolescentes não são aceitos (veja a seção 5.4).
 
 ## 9. Denunciar um anúncio
 

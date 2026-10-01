@@ -2,13 +2,13 @@
 title: Termos de Uso | KIVAK
 h1: Termos de Uso
 description: As regras para usar o KIVAK: sua conta, o que você pode publicar, como funcionam denúncia, bloqueio e moderação, o KIVAK Business e as responsabilidades de cada lado.
-vigencia: 2026-09-29
-updated: 2026-09-29
-versao: 2.0
+vigencia: 2026-10-01
+updated: 2026-10-01
+versao: 2.1
 ---
 ## 1. Quem somos
 
-O KIVAK é uma rede social de trilha, camping e aventura ao ar livre. Ele é operado por **[PREENCHER: razão social]**, inscrita no CNPJ sob o nº **[PREENCHER: CNPJ]**, com sede em **[PREENCHER: endereço completo da sede]** (neste texto, "KIVAK", "nós" ou "nosso").
+O KIVAK é uma rede social de trilha, camping e aventura ao ar livre. É um projeto independente, ainda sem empresa aberta, criado e mantido por **Alan Martinski**, pessoa física, de Camboriú/SC (neste texto, "KIVAK", "nós" ou "nosso").
 
 Estes Termos valem para todos os lugares onde o KIVAK funciona:
 
@@ -27,8 +27,7 @@ Ao criar uma conta ou usar o KIVAK, você concorda com estes Termos, com a [Pol�
 
 Para usar o KIVAK, você precisa:
 
-- ter pelo menos 13 anos;
-- se tiver entre 13 e 17 anos, contar com a autorização do seu pai, mãe ou responsável legal, que também responde pelo uso que você faz do KIVAK;
+- ter 18 anos ou mais (ao criar a conta, você declara isso);
 - não ter sido banido do KIVAK antes;
 - aceitar que estes Termos são regidos pela lei brasileira.
 
@@ -112,7 +111,7 @@ Fotos, vídeos, textos, avaliações e trilhas que você publica continuam sendo
 
 ### 8.2 Licença para o KIVAK
 
-Para que o KIVAK funcione, você nos dá uma licença gratuita, não exclusiva e válida no mundo todo para armazenar, reproduzir, adaptar (por exemplo, redimensionar uma foto), exibir e distribuir o seu conteúdo dentro do KIVAK e na divulgação do próprio KIVAK. Essa licença termina quando você apaga o conteúdo ou exclui a conta, ressalvadas as cópias que precisemos guardar por lei.
+Para que o KIVAK funcione, você nos dá uma licença gratuita, não exclusiva e válida no mundo todo para armazenar, reproduzir, adaptar (por exemplo, redimensionar uma foto), exibir e distribuir o seu conteúdo dentro do KIVAK e na divulgação do próprio KIVAK. Essa licença termina quando você apaga o conteúdo ou exclui a conta, ressalvadas as cópias que precisemos guardar por lei. A exceção são as trilhas e as avaliações de locais e trilhas: se você excluir a conta sem apagá-las antes, elas continuam publicadas sem identificar você, assinadas por "Conta excluída" (veja a seção 17.2).
 
 ### 8.3 Sua responsabilidade
 
@@ -190,7 +189,7 @@ Podemos suspender ou encerrar sua conta por violação destes Termos ou das Dire
 
 ### 17.2 Por você
 
-Você pode excluir sua conta quando quiser, em **Configurações > Excluir minha conta**, no app ou na versão web, ou pedindo por e-mail em [kivak.app@gmail.com](mailto:kivak.app@gmail.com). A conta sai do ar na hora: suas sessões são encerradas e seu perfil, seu conteúdo e, se existir, sua Página do KIVAK Business deixam de aparecer. A remoção definitiva dos seus dados pessoais é feita pela nossa equipe em até 30 dias, exceto os registros que a lei obriga a guardar. Os detalhes estão na [Política de Privacidade](/privacidade#11-exclusao-da-conta).
+Você pode excluir sua conta quando quiser, em **Configurações > Excluir minha conta**, no app ou na versão web, ou pedindo por e-mail em [kivak.app@gmail.com](mailto:kivak.app@gmail.com). A conta sai do ar na hora: suas sessões são encerradas e seu perfil, seu conteúdo e, se existir, sua Página do KIVAK Business deixam de aparecer. Em até 30 dias, a nossa equipe remove os seus dados pessoais e a conta fica anônima, exceto os registros que a lei obriga a guardar. Suas trilhas e avaliações voltam a aparecer assinadas por "Conta excluída", sem nada que identifique você; se não quiser isso, apague-as antes de excluir a conta. Os detalhes estão na [Política de Privacidade](/privacidade#11-exclusao-da-conta).
 
 ## 18. Mudanças nestes Termos
 
@@ -198,7 +197,7 @@ Podemos atualizar estes Termos. Quando a mudança for relevante, avisamos no app
 
 ## 19. Lei aplicável e foro
 
-Estes Termos são regidos pelas leis do Brasil, em especial o Código Civil, o Código de Defesa do Consumidor, o Marco Civil da Internet e a Lei Geral de Proteção de Dados (LGPD). Fica eleito o foro da comarca de **[PREENCHER: cidade/UF do foro]**, sem prejuízo do seu direito, como consumidor, de propor ação no foro do seu domicílio. Se alguma cláusula for considerada inválida, as demais continuam valendo.
+Estes Termos são regidos pelas leis do Brasil, em especial o Código Civil, o Código de Defesa do Consumidor, o Marco Civil da Internet e a Lei Geral de Proteção de Dados (LGPD). Qualquer disputa sobre estes Termos fica no foro do seu domicílio. Se alguma cláusula for considerada inválida, as demais continuam valendo.
 
 ## 20. Contato
 
