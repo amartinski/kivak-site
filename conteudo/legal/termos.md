@@ -194,11 +194,11 @@ Nada nestes Termos afasta os direitos que o Código de Defesa do Consumidor gara
 
 ## 18. Suspensão e encerramento da conta
 
-### 19.1 Pelo KIVAK
+### 18.1 Pelo KIVAK
 
 Podemos suspender ou encerrar sua conta por violação destes Termos ou das Diretrizes, por fraude, para cumprir ordem de autoridade ou para proteger a segurança de outras pessoas.
 
-### 19.2 Por você
+### 18.2 Por você
 
 Você pode excluir sua conta quando quiser, em **Configurações > Excluir minha conta**, no app ou na versão web, ou pedindo por e-mail em [kivak.app@gmail.com](mailto:kivak.app@gmail.com). A conta sai do ar na hora: suas sessões são encerradas e seu perfil, seu conteúdo e, se existir, sua Página do KIVAK Business deixam de aparecer. Em até 30 dias, a nossa equipe remove os seus dados pessoais e a conta fica anônima, exceto os registros que a lei obriga a guardar. Suas trilhas e avaliações voltam a aparecer assinadas por "Conta excluída", sem nada que identifique você; se não quiser isso, apague-as antes de excluir a conta. Os detalhes estão na [Política de Privacidade](/privacidade#11-exclusao-da-conta).
 
