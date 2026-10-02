@@ -111,7 +111,7 @@ Fotos, vídeos, textos, avaliações e trilhas que você publica continuam sendo
 
 ### 8.2 Licença para o KIVAK
 
-Para que o KIVAK funcione, você nos dá uma licença gratuita, não exclusiva e válida no mundo todo para armazenar, reproduzir, adaptar (por exemplo, redimensionar uma foto), exibir e distribuir o seu conteúdo dentro do KIVAK e na divulgação do próprio KIVAK. Essa licença termina quando você apaga o conteúdo ou exclui a conta, ressalvadas as cópias que precisemos guardar por lei. A exceção são as trilhas e as avaliações de locais e trilhas: se você excluir a conta sem apagá-las antes, elas continuam publicadas sem identificar você, assinadas por "Conta excluída" (veja a seção 17.2).
+Para que o KIVAK funcione, você nos dá uma licença gratuita, não exclusiva e válida no mundo todo para armazenar, reproduzir, adaptar (por exemplo, redimensionar uma foto), exibir e distribuir o seu conteúdo dentro do KIVAK e na divulgação do próprio KIVAK. Essa licença termina quando você apaga o conteúdo ou exclui a conta, ressalvadas as cópias que precisemos guardar por lei. A exceção são as trilhas e as avaliações de locais e trilhas: se você excluir a conta sem apagá-las antes, elas continuam publicadas sem identificar você, assinadas por "Conta excluída" (veja a seção 18.2).
 
 ### 8.3 Sua responsabilidade
 
@@ -147,15 +147,26 @@ O KIVAK Business é o painel onde empresas e profissionais criam e cuidam da pr�
 
 Anúncios seguem também a [Política de Publicidade](/publicidade), que traz as regras de conteúdo, a revisão prévia e as condições de contratação.
 
-## 12. Publicidade e links de afiliados
+## 12. Classificados e Vitrine
+
+Nos **Classificados**, qualquer pessoa pode anunciar equipamento, serviço, aluguel, troca ou doação. Na **Vitrine**, as Páginas do KIVAK Business mostram os produtos e serviços delas, que também aparecem nos Classificados.
+
+- **O KIVAK não vende, não compra e não intermedia pagamento.** O KIVAK só mostra o anúncio: a negociação, o pagamento, a entrega e a garantia são combinados diretamente entre quem anuncia e quem se interessa, que respondem por esse acordo. Não somos parte do negócio e não respondemos pela qualidade, pela existência ou pela entrega do que foi anunciado.
+- Quem anuncia precisa ter o que anuncia, descrever o item com honestidade (estado, defeitos, preço) e tirar o anúncio do ar ou marcá-lo como vendido quando ele não estiver mais disponível.
+- Item de Página é oferta de quem tem a Página, que responde por ela inclusive perante o Código de Defesa do Consumidor. Entre pessoas, valem as regras comuns de compra e venda.
+- O título, a descrição, as fotos, o preço, a cidade e o estado do anúncio são **públicos**, junto com o seu nome e a sua foto de perfil (ou os dados da Página).
+- Não pode anunciar nada do que as [Diretrizes](/diretrizes#classificados-e-vitrine) proíbem. Anúncios fora das regras saem do ar e a conta pode ser penalizada.
+- Cada pessoa pode ter até 30 anúncios ativos ou pausados ao mesmo tempo.
+
+## 13. Publicidade e links de afiliados
 
 O KIVAK é gratuito para quem usa. Para se manter, exibe anúncios de empresas do KIVAK Business e links de afiliados de lojas como Amazon e Shopee, sempre identificados como publicidade. Quando você compra por um link de afiliado, o KIVAK pode receber uma comissão, sem custo extra para você. Não respondemos pelos produtos, preços, entregas ou práticas das lojas e dos anunciantes. Os detalhes estão na [Política de Publicidade](/publicidade).
 
-## 13. Propriedade intelectual do KIVAK
+## 14. Propriedade intelectual do KIVAK
 
 O nome KIVAK, a marca, o logo, o design, o código e o banco de dados do KIVAK são protegidos por lei. Sem autorização por escrito, você não pode copiá-los, usá-los comercialmente ou criar produtos derivados.
 
-## 14. Uso proibido da plataforma
+## 15. Uso proibido da plataforma
 
 Você não pode:
 
@@ -166,11 +177,11 @@ Você não pode:
 - contornar bloqueios, suspensões, limites ou a moderação;
 - vender, alugar ou transferir a sua conta.
 
-## 15. Disponibilidade e garantias
+## 16. Disponibilidade e garantias
 
 O KIVAK está em fase de lançamento e é oferecido como está. Trabalhamos para que ele funcione bem, mas não garantimos que estará sempre disponível, sem erros, ou que todas as informações de locais e trilhas estarão corretas. Podemos mudar, suspender ou encerrar funcionalidades, avisando com antecedência sempre que a mudança for relevante para você.
 
-## 16. Limitação de responsabilidade
+## 17. Limitação de responsabilidade
 
 Na máxima extensão permitida pela lei brasileira, o KIVAK não responde por:
 
@@ -181,24 +192,24 @@ Na máxima extensão permitida pela lei brasileira, o KIVAK não responde por:
 
 Nada nestes Termos afasta os direitos que o Código de Defesa do Consumidor garante a você.
 
-## 17. Suspensão e encerramento da conta
+## 18. Suspensão e encerramento da conta
 
-### 17.1 Pelo KIVAK
+### 19.1 Pelo KIVAK
 
 Podemos suspender ou encerrar sua conta por violação destes Termos ou das Diretrizes, por fraude, para cumprir ordem de autoridade ou para proteger a segurança de outras pessoas.
 
-### 17.2 Por você
+### 19.2 Por você
 
 Você pode excluir sua conta quando quiser, em **Configurações > Excluir minha conta**, no app ou na versão web, ou pedindo por e-mail em [kivak.app@gmail.com](mailto:kivak.app@gmail.com). A conta sai do ar na hora: suas sessões são encerradas e seu perfil, seu conteúdo e, se existir, sua Página do KIVAK Business deixam de aparecer. Em até 30 dias, a nossa equipe remove os seus dados pessoais e a conta fica anônima, exceto os registros que a lei obriga a guardar. Suas trilhas e avaliações voltam a aparecer assinadas por "Conta excluída", sem nada que identifique você; se não quiser isso, apague-as antes de excluir a conta. Os detalhes estão na [Política de Privacidade](/privacidade#11-exclusao-da-conta).
 
-## 18. Mudanças nestes Termos
+## 19. Mudanças nestes Termos
 
 Podemos atualizar estes Termos. Quando a mudança for relevante, avisamos no app ou por e-mail com pelo menos 10 dias de antecedência. A data de vigência fica sempre no topo desta página. Se continuar usando o KIVAK depois que a nova versão entrar em vigor, você concorda com ela. Se não concordar, pode excluir a sua conta.
 
-## 19. Lei aplicável e foro
+## 20. Lei aplicável e foro
 
 Estes Termos são regidos pelas leis do Brasil, em especial o Código Civil, o Código de Defesa do Consumidor, o Marco Civil da Internet e a Lei Geral de Proteção de Dados (LGPD). Qualquer disputa sobre estes Termos fica no foro do seu domicílio. Se alguma cláusula for considerada inválida, as demais continuam valendo.
 
-## 20. Contato
+## 21. Contato
 
 Dúvidas sobre estes Termos: [kivak.app@gmail.com](mailto:kivak.app@gmail.com).

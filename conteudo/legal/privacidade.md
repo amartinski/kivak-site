@@ -31,6 +31,7 @@ Esta Política segue a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 
 <tr><td>Trilhas gravadas: percurso (coordenadas de GPS), distância, duração, velocidade média e máxima, dificuldade, nome, descrição e foto</td><td>Quando você grava e salva uma trilha</td></tr>
 <tr><td>Locais cadastrados: nome, tipo, descrição, fotos, endereço e o ponto (pin) no mapa</td><td>Quando você cadastra um local</td></tr>
 <tr><td>Avaliações de locais, de trilhas e de outros aventureiros</td><td>Quando você avalia</td></tr>
+<tr><td>Anúncios nos Classificados: título, descrição, fotos, preço, categoria, cidade e estado</td><td>Quando você anuncia (ficam públicos, junto com o seu nome e a sua foto)</td></tr>
 <tr><td>Mensagens do chat, com texto e mídia</td><td>Quando você conversa com alguém</td></tr>
 <tr><td>Amizades, comunidades, eventos em que confirmou presença e Páginas que segue</td><td>Quando você usa essas funções</td></tr>
 <tr><td>Denúncias e bloqueios que você faz</td><td>Quando você denuncia ou bloqueia</td></tr>

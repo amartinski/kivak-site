@@ -97,6 +97,15 @@ O KIVAK pode intervir em qualquer comunidade ou evento que viole estas Diretrize
 - Publicações da Página podem ser avisos, promoções ou eventos, desde que verdadeiros. Quem quer alcançar pessoas além dos seus seguidores usa os anúncios.
 - Não crie Página para se passar por outra empresa ou pessoa.
 
+## Classificados e Vitrine
+
+- Anuncie só o que você tem e pode entregar, com fotos reais e descrição honesta, inclusive defeitos.
+- Marque como vendido ou apague o anúncio assim que ele deixar de estar disponível.
+- Não é permitido anunciar: armas, munição e acessórios de arma (inclusive de pressão e airsoft que exijam registro), drogas e medicamentos, animais (vivos ou partes), plantas e produtos de espécies protegidas, fogos de artifício e explosivos, produtos falsificados, roubados ou sem procedência, documentos, contas e ingressos revendidos acima do preço, e qualquer item proibido por lei.
+- Equipamento de segurança (cordas, cadeirinhas, mosquetões, capacetes, coletes) só pode ser anunciado com o histórico de uso e a idade informados na descrição. Na dúvida, não use equipamento de segurança de procedência desconhecida.
+- Nada de pedir pagamento antecipado por fora com pressa, links estranhos ou "sinal" para segurar o item: isso é golpe e leva ao banimento.
+- O KIVAK não intermedia pagamentos. Prefira encontrar em lugar público e movimentado, confira o item antes de pagar e desconfie de preço bom demais.
+
 ## Como denunciar
 
 Viu algo que quebra estas regras? Toque em **Denunciar** no próprio conteúdo ou perfil. A opção existe em publicações, comentários, reels, histórias, mensagens do chat, posts de comunidade e de evento, perfis, Páginas, locais e trilhas.
