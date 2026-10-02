@@ -69,7 +69,8 @@
       <div class="success-icon">🎉</div>
       <h3 style="text-align:center">Sua conta está pronta!</h3>
       <p class="form-sub" style="text-align:center">Baixe o app abaixo e faça login com seu e-mail e a senha que você acabou de criar.</p>
-      <a class="btn btn-primary btn-block" id="link-download" href="#">📲 Baixar o KIVAK (Android)</a>
+      <a class="btn btn-primary btn-block" id="link-download" href="#" download>📲 Baixar o KIVAK (Android)</a>
+      <p class="form-sub" style="text-align:center;margin-top:12px">Primeira vez instalando um APK? <a href="/baixar#android">Veja o passo a passo</a>.</p>
       <p class="form-sub" style="text-align:center;margin-top:16px">No iPhone ou no computador? Entre pelo navegador com o mesmo e-mail e senha.</p>
       <a class="btn btn-block" style="border:1.5px solid var(--border);color:var(--ink)" href="https://platform.kivak.app/entrar">🌐 Entrar pelo navegador</a>
     </div>
@@ -77,9 +78,9 @@
 </div>
 
 <script>
-  // TODO: apontar pro APK hospedado de verdade (ex: media.kivak.app/kivak.apk)
-  // assim que decidirem onde ele vai ficar publicamente.
-  const APK_DOWNLOAD_URL = 'assets/kivak.apk';
+  // Servido pelo nginx a partir da pasta apk/ do mini PC (fora do git; ver
+  // nginx.conf e docker-compose.prod.yml).
+  const APK_DOWNLOAD_URL = '/kivak.apk';
 
   const API_BASE = 'https://api.kivak.app/api/v2';
   const params = new URLSearchParams(window.location.search);

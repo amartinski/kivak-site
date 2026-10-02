@@ -43,7 +43,7 @@
     </ul>
     <div class="nav-right">
       <a class="btn btn-ghost-light btn-sm" href="https://platform.kivak.app/entrar">Entrar</a>
-      <a class="btn btn-primary btn-sm" href="#baixar">Baixar o app</a>
+      <a class="btn btn-primary btn-sm" href="/baixar">Baixar o app</a>
     </div>
   </div>
   <a class="nav-entrar" href="https://platform.kivak.app/entrar">Entrar</a>
@@ -59,7 +59,7 @@
     <h1>O mapa acaba<br/>onde a sua <em>perna</em><br/>começa.</h1>
     <p class="lede">KIVAK é a rede social de quem sai de casa pra valer: trilha com GPS de verdade, campings avaliados por quem dormiu lá e comunidades que organizam a saída, em vez de só conversar sobre ela.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#baixar">📲 Quero baixar</a>
+      <a class="btn btn-primary" href="/baixar">📲 Quero baixar</a>
       <a class="btn btn-ghost-light" href="/empresas">💼 Sou uma empresa</a>
     </div>
   </div>
@@ -160,42 +160,15 @@
   </div>
 </section>
 
-<!-- ─── DOWNLOAD / LISTA DE ESPERA ──────────────────────────────── -->
+<!-- ─── BAIXAR (o download, a história e o formulário ficam em /baixar) ── -->
 <section id="baixar" class="cta-dark">
-  <div class="container download-grid">
-    <div class="download-copy fade-in">
-      <span class="eyebrow">Acesso antecipado</span>
-      <h2 class="title">Baixe. Grave a primeira.<br/>Veja o mapa ficar seu.</h2>
-      <p class="sub">O KIVAK está em fase de lançamento controlado. No Android, o app é distribuído direto, sem loja. No iPhone e no computador, você usa pelo navegador, com tudo que é social: feed, mapa, grupos e mensagens. O acesso é liberado aos poucos: deixe seu contato abaixo que avisamos assim que chegar a sua vez.</p>
-    </div>
-    <div class="form-card fade-in">
-      <h3>Quero acesso ao KIVAK</h3>
-      <p class="form-sub">Leva 15 segundos. Você recebe um e-mail assim que seu acesso for liberado.</p>
-      <form id="form-acesso" novalidate>
-        <div class="field">
-          <label for="nome">Seu nome</label>
-          <input type="text" id="nome" name="nome" required minlength="2" placeholder="Como podemos te chamar" />
-        </div>
-        <div class="field">
-          <label for="email">Seu e-mail</label>
-          <input type="email" id="email" name="email" required placeholder="seu@email.com" />
-        </div>
-        <div class="field">
-          <label>Qual celular você usa?</label>
-          <div class="platform-choice">
-            <label class="platform-option">
-              <input type="radio" name="plataforma" value="android" />
-              🤖 Android
-            </label>
-            <label class="platform-option">
-              <input type="radio" name="plataforma" value="ios" />
-              🍎 iPhone
-            </label>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Quero acesso →</button>
-        <div class="form-msg"></div>
-      </form>
+  <div class="container wrap-narrow baixar-teaser fade-in">
+    <span class="eyebrow">Antes de baixar</span>
+    <h2 class="title">Feito por um sonhador.<br/>Hospedado num servidor caseiro.</h2>
+    <p class="sub center">O KIVAK não tem empresa grande nem loja de aplicativo por trás. Conheça a história, veja como instalar no Android e no iPhone e descubra como ajudar essa comunidade a crescer.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/baixar">📲 Ver como baixar</a>
+      <a class="btn btn-ghost-light" href="/baixar#apoie">💚 Quero apoiar</a>
     </div>
   </div>
 </section>
@@ -218,7 +191,8 @@
         <h5>KIVAK</h5>
         <a href="#recursos">Recursos</a>
         <a href="#comunidades">Comunidades</a>
-        <a href="#baixar">Baixar o app</a>
+        <a href="/baixar">Baixar o app</a>
+        <a href="/baixar#apoie">Apoie o KIVAK</a>
       </div>
       <div class="footer-col">
         <h5>Guias</h5>

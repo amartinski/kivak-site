@@ -1,5 +1,5 @@
 // Gera a parte estática do site em dist/: copia as páginas feitas à mão
-// (index, empresas, ativar), gera as páginas de conteudo/paginas/*.md e as
+// (index, empresas, baixar, ativar), gera as páginas de conteudo/paginas/*.md e as
 // legais de conteudo/legal/*.md (termos, privacidade, diretrizes, publicidade), o
 // 404.html e um sitemap.xml de reserva, e troca __CSSVER__/__JSVER__ pelo
 // hash do conteúdo (cache-busting; ver nginx.conf, /assets/ é immutable).
@@ -104,6 +104,7 @@ function faq(body) {
 const rotas = [
   { path: '/', lastmod: null },
   { path: '/empresas', lastmod: null },
+  { path: '/baixar', lastmod: null },
 ];
 
 // ─── Páginas de conteúdo (conteudo/paginas/*.md → /<slug>) ─────────
@@ -118,7 +119,7 @@ for (const f of readdirSync('conteudo/paginas').filter((f) => f.endsWith('.md'))
       ${breadcrumbHtml(trail)}
       <h1>${inline(meta.h1 || meta.title)}</h1>
       <p class="lede">${inline(meta.description)}</p>
-      <a class="btn btn-primary" href="/#baixar">📲 Quero acesso ao KIVAK</a>
+      <a class="btn btn-primary" href="/baixar">📲 Quero baixar o KIVAK</a>
     </div>
   </header>
   <article class="container wrap-prose prose">
@@ -180,7 +181,7 @@ ${marcarPendencias(markdown(body))}
 writeFileSync(join(OUT, '404.html'), pagina404());
 
 // ─── Páginas feitas à mão + assets ────────────────────────────────
-for (const f of ['index.html', 'empresas.html', 'ativar.html']) cpSync(f, join(OUT, f));
+for (const f of ['index.html', 'empresas.html', 'baixar.html', 'ativar.html']) cpSync(f, join(OUT, f));
 cpSync('assets', join(OUT, 'assets'), { recursive: true });
 cpSync('robots.txt', join(OUT, 'robots.txt'));
 

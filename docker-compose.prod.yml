@@ -12,6 +12,10 @@ services:
       - blog
     ports:
       - "127.0.0.1:8090:8080"   # só loopback: alcançável pelo cloudflared (kivak.app)
+    volumes:
+      # APK servido em kivak.app/kivak.apk (ver nginx.conf). Copie o kivak.apk
+      # gerado pra apk/ nesta pasta; trocar o arquivo já publica, sem rebuild.
+      - ./apk:/usr/share/nginx/apk:ro
 
   blog:
     build:

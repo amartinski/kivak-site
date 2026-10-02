@@ -5,7 +5,7 @@
 # arquivo muda de verdade).
 FROM node:22-alpine AS build
 WORKDIR /site
-COPY build.mjs blog-server.mjs index.html empresas.html ativar.html robots.txt ./
+COPY build.mjs blog-server.mjs index.html empresas.html baixar.html ativar.html robots.txt ./
 COPY lib ./lib
 COPY assets ./assets
 COPY conteudo ./conteudo
