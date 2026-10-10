@@ -51,7 +51,7 @@ O @ precisa ser seu, sem termos ofensivos e sem usar marca ou nome de outra pess
 
 ## 5. O que você pode fazer no KIVAK
 
-- Publicar fotos, vídeos, reels e histórias (as histórias somem depois de 24 horas).
+- Publicar fotos, vídeos, drops e Daily (o Daily some depois de 24 horas).
 - Gravar trilhas com o GPS do celular e compartilhar o percurso.
 - Cadastrar e avaliar campings, cachoeiras, mirantes, trilhas e outros locais no mapa.
 - Participar de comunidades, criar eventos e confirmar presença.
@@ -62,7 +62,7 @@ O @ precisa ser seu, sem termos ofensivos e sem usar marca ou nome de outra pess
 
 <div class="alerta"><p><strong>No KIVAK, conteúdo abusivo não tem segunda chance garantida.</strong> Removemos o conteúdo e podemos suspender ou banir a conta de quem o publicou, sem aviso prévio. Casos envolvendo crianças e adolescentes, ameaças ou crimes são comunicados às autoridades.</p></div>
 
-É proibido publicar, enviar ou promover, em qualquer parte do KIVAK (publicações, reels, histórias, comentários, mensagens, comunidades, eventos, avaliações, perfis, Páginas e anúncios), conteúdo que:
+É proibido publicar, enviar ou promover, em qualquer parte do KIVAK (publicações, drops, Daily, comentários, mensagens, comunidades, eventos, avaliações, perfis, Páginas e anúncios), conteúdo que:
 
 - promova ódio ou discriminação por raça, cor, etnia, origem, religião, gênero, identidade de gênero, orientação sexual, deficiência, idade ou condição social;
 - assedie, ameace, intimide, persiga ou humilhe outra pessoa;
@@ -82,7 +82,7 @@ As regras completas e exemplos estão nas [Diretrizes da Comunidade](/diretrizes
 
 ### 7.1 Denunciar
 
-Todo conteúdo e todo perfil do KIVAK tem a opção **Denunciar**: publicações, comentários, reels, histórias, mensagens do chat, posts de comunidade e de evento, perfis, Páginas, locais e trilhas. Você escolhe o motivo (spam ou golpe, ódio ou ofensa, assédio, nudez ou conteúdo sexual, violência, informação falsa, local ou atividade perigosa, ou outro) e pode explicar o caso. Quem é denunciado não fica sabendo quem denunciou.
+Todo conteúdo e todo perfil do KIVAK tem a opção **Denunciar**: publicações, comentários, drops, Daily, mensagens do chat, posts de comunidade e de evento, perfis, Páginas, locais e trilhas. Você escolhe o motivo (spam ou golpe, ódio ou ofensa, assédio, nudez ou conteúdo sexual, violência, informação falsa, local ou atividade perigosa, ou outro) e pode explicar o caso. Quem é denunciado não fica sabendo quem denunciou.
 
 ### 7.2 Prazo de análise
 

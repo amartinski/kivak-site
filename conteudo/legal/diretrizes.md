@@ -10,7 +10,7 @@ versao: 2.0
 
 O KIVAK existe para juntar gente que gosta de trilha, camping e natureza, trocar descobertas e sair de casa com mais segurança. Para isso funcionar, todo mundo precisa se sentir bem-vindo e protegido aqui dentro.
 
-Estas Diretrizes valem para tudo o que acontece no KIVAK: publicações, reels, histórias, comentários, mensagens do chat, comunidades, eventos, avaliações, trilhas, locais, perfis, Páginas do KIVAK Business e anúncios. Elas fazem parte dos [Termos de Uso](/termos).
+Estas Diretrizes valem para tudo o que acontece no KIVAK: publicações, drops, Daily, comentários, mensagens do chat, comunidades, eventos, avaliações, trilhas, locais, perfis, Páginas do KIVAK Business e anúncios. Elas fazem parte dos [Termos de Uso](/termos).
 
 ## Tolerância zero
 
@@ -108,7 +108,7 @@ O KIVAK pode intervir em qualquer comunidade ou evento que viole estas Diretrize
 
 ## Como denunciar
 
-Viu algo que quebra estas regras? Toque em **Denunciar** no próprio conteúdo ou perfil. A opção existe em publicações, comentários, reels, histórias, mensagens do chat, posts de comunidade e de evento, perfis, Páginas, locais e trilhas.
+Viu algo que quebra estas regras? Toque em **Denunciar** no próprio conteúdo ou perfil. A opção existe em publicações, comentários, drops, Daily, mensagens do chat, posts de comunidade e de evento, perfis, Páginas, locais e trilhas.
 
 - Escolha o motivo e, se quiser, explique o que aconteceu.
 - Quem foi denunciado não fica sabendo quem denunciou.

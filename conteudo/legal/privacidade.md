@@ -26,7 +26,7 @@ Esta Política segue a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 
 <tr><td>E-mail e senha</td><td>Cadastro. A senha nunca é guardada como texto: guardamos só um código gerado a partir dela (hash argon2id), que não permite descobrir a senha.</td></tr>
 <tr><td>Nome, nome de usuário (@) e foto de perfil</td><td>Cadastro</td></tr>
 <tr><td>Bio, cidade e estado</td><td>Perfil (opcionais)</td></tr>
-<tr><td>Publicações, reels, histórias, fotos e vídeos</td><td>Quando você publica</td></tr>
+<tr><td>Publicações, drops, Daily, fotos e vídeos</td><td>Quando você publica</td></tr>
 <tr><td>Comentários, curtidas e menções</td><td>Quando você interage</td></tr>
 <tr><td>Trilhas gravadas: percurso (coordenadas de GPS), distância, duração, velocidade média e máxima, dificuldade, nome, descrição e foto</td><td>Quando você grava e salva uma trilha</td></tr>
 <tr><td>Locais cadastrados: nome, tipo, descrição, fotos, endereço e o ponto (pin) no mapa</td><td>Quando você cadastra um local</td></tr>
@@ -133,7 +133,7 @@ As ofertas da Shopee que aparecem no feed são buscadas pelo nosso servidor a pa
 
 ### 7.3 Outras pessoas do KIVAK
 
-Seu nome, @, foto, bio, cidade, publicações, reels, histórias, trilhas salvas, locais cadastrados, avaliações e comunidades aparecem para outras pessoas do KIVAK. Mensagens do chat são vistas só por quem participa da conversa. Quem você bloqueia deixa de ver o seu conteúdo, e você deixa de ver o dela.
+Seu nome, @, foto, bio, cidade, publicações, drops, Daily, trilhas salvas, locais cadastrados, avaliações e comunidades aparecem para outras pessoas do KIVAK. Mensagens do chat são vistas só por quem participa da conversa. Quem você bloqueia deixa de ver o seu conteúdo, e você deixa de ver o dela.
 
 ### 7.4 Autoridades
 
@@ -153,7 +153,7 @@ Alguns dos serviços da seção 7.2 ficam fora do Brasil (Estados Unidos, Franç
 <thead><tr><th>Dado</th><th>Prazo</th></tr></thead>
 <tbody>
 <tr><td>Dados da conta e conteúdo publicado</td><td>Enquanto a conta existir, ou até você apagar o conteúdo</td></tr>
-<tr><td>Histórias</td><td>Apagadas, com o arquivo, depois de 24 horas</td></tr>
+<tr><td>Daily</td><td>Apagadas, com o arquivo, depois de 24 horas</td></tr>
 <tr><td>Dados de uma conta excluída</td><td>A conta sai do ar na hora. Em até 30 dias, os dados pessoais são removidos e a conta fica anônima, exceto os registros que a lei nos obriga a guardar. Trilhas e avaliações continuam publicadas como "Conta excluída"</td></tr>
 <tr><td>Registro de acesso (IP, data e hora)</td><td>Pelo menos 6 meses, como exige o Marco Civil da Internet</td></tr>
 <tr><td>Denúncias e decisões de moderação</td><td>Enquanto forem necessárias para a segurança da comunidade e para eventual defesa em processo</td></tr>
@@ -187,9 +187,9 @@ Você pode excluir a sua conta a qualquer momento:
 O que acontece, em duas etapas:
 
 1. **Na hora:** a conta sai do ar. Seu perfil e o seu conteúdo deixam de aparecer para as outras pessoas, todas as suas sessões são encerradas e as conexões do chat são fechadas. Se você tinha uma Página no KIVAK Business, ela e o ponto dela no mapa também saem do ar.
-2. **Em até 30 dias:** a exclusão abre um pedido para a nossa equipe, que remove os seus dados pessoais do banco de dados e dos arquivos de mídia: nome, e-mail, nome de usuário, foto, bio, cidade, histórias, amizades e notificações. A conta passa a ser anônima e o seu e-mail fica livre para um cadastro novo.
+2. **Em até 30 dias:** a exclusão abre um pedido para a nossa equipe, que remove os seus dados pessoais do banco de dados e dos arquivos de mídia: nome, e-mail, nome de usuário, foto, bio, cidade, Daily, amizades e notificações. A conta passa a ser anônima e o seu e-mail fica livre para um cadastro novo.
 
-As **trilhas e avaliações** de locais e trilhas que você publicou continuam no KIVAK, porque ajudam outras pessoas a se planejar, mas aparecem assinadas apenas por "Conta excluída", sem nada que identifique você. Publicações, reels, comentários e mensagens ficam fora do ar. Se preferir que as suas trilhas e avaliações também saiam, apague-as antes de excluir a conta ou peça pelo e-mail [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
+As **trilhas e avaliações** de locais e trilhas que você publicou continuam no KIVAK, porque ajudam outras pessoas a se planejar, mas aparecem assinadas apenas por "Conta excluída", sem nada que identifique você. Publicações, drops, comentários e mensagens ficam fora do ar. Se preferir que as suas trilhas e avaliações também saiam, apague-as antes de excluir a conta ou peça pelo e-mail [kivak.app@gmail.com](mailto:kivak.app@gmail.com).
 
 Alguns registros podem ser guardados pelo tempo que a lei exige mesmo depois disso, como o registro de acesso (IP, data e hora), que o Marco Civil da Internet manda guardar por 6 meses, e o que for necessário para cumprir obrigação legal ou defender direitos em processo. As cópias de segurança criptografadas são substituídas no ciclo normal de backup.
 

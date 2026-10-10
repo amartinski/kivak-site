@@ -15,7 +15,7 @@ O KIVAK reúne num só app, feito no Brasil, três coisas que normalmente ficam 
 
 1. **Gravação de trilha com GPS**, com traçado, distância, altimetria e ganho de elevação
 2. **Guia de campings** avaliados por quem dormiu lá
-3. **Rede social de aventura**, com feed, stories, reels, chat, comunidades e eventos com lista de confirmados
+3. **Rede social de aventura**, com feed, Daily, drops, chat, comunidades e eventos com lista de confirmados
 
 Se você precisa de só uma dessas coisas, talvez um app especializado resolva. Se quer as três no mesmo lugar, com uma comunidade brasileira, é para isso que o KIVAK existe.
 
