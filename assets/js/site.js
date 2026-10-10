@@ -86,6 +86,7 @@ if (form) {
         }),
       });
       if (!res.ok) throw new Error('erro');
+      window.kivakEvento?.('formulario_enviado', { tipo, plataforma: plataforma?.value || '' });
 
       if (tipo === 'anunciante') {
         msg.textContent = 'Recebemos seu contato! Alguém do time KIVAK te retorna em breve.';
@@ -98,6 +99,7 @@ if (form) {
       form.reset();
       options.forEach((o) => o.classList.remove('selected'));
     } catch {
+      window.kivakEvento?.('formulario_erro', { tipo });
       msg.textContent = 'Não foi possível enviar agora. Tenta de novo em instantes?';
       msg.className = 'form-msg err';
     } finally {

@@ -2,9 +2,9 @@
 title: Política de Privacidade | KIVAK
 h1: Política de Privacidade
 description: Quais dados o KIVAK coleta, para que usa, onde eles ficam, com quem são compartilhados e como você exerce os seus direitos pela LGPD, inclusive a exclusão da conta.
-vigencia: 2026-10-01
-updated: 2026-10-01
-versao: 2.1
+vigencia: 2026-10-10
+updated: 2026-10-10
+versao: 2.2
 ---
 ## 1. Quem cuida dos seus dados
 
@@ -14,7 +14,7 @@ Como agente de tratamento de pequeno porte, o KIVAK não é obrigado a indicar u
 
 Esta Política segue a Lei Geral de Proteção de Dados Pessoais (LGPD, Lei nº 13.709/2018) e o Marco Civil da Internet (Lei nº 12.965/2014). Ela vale para o aplicativo KIVAK, para a versão web em [platform.kivak.app](https://platform.kivak.app), para o painel [KIVAK Business](https://business.kivak.app) e para o site [kivak.app](https://kivak.app).
 
-> Resumo: não vendemos seus dados, não usamos ferramentas de rastreamento de terceiros e não mostramos anúncios com base no seu perfil. Seus dados ficam no servidor do próprio KIVAK, e só alguns serviços essenciais, listados na seção 7, recebem o mínimo necessário para funcionar.
+> Resumo: não vendemos seus dados, não usamos ferramentas de rastreamento de terceiros no app, na versão web nem no KIVAK Business e não mostramos anúncios com base no seu perfil. Só o site kivak.app usa ferramentas de medição de visitas, e apenas se você permitir (seção 14). Seus dados ficam no servidor do próprio KIVAK, e só alguns serviços essenciais, listados na seção 7, recebem o mínimo necessário para funcionar.
 
 ## 2. Dados que coletamos
 
@@ -61,7 +61,7 @@ Se você cria uma conta Business, também tratamos:
 </tbody>
 </table></div>
 
-Não coletamos o identificador de publicidade do seu aparelho, não usamos SDKs de publicidade ou de análise de terceiros e não montamos perfil de interesses para anúncios.
+Não coletamos o identificador de publicidade do seu aparelho, não usamos SDKs de publicidade ou de análise de terceiros no app e não montamos perfil de interesses para anúncios.
 
 ## 3. Localização
 
@@ -124,6 +124,8 @@ Não vendemos seus dados. Para funcionar, o KIVAK usa os serviços abaixo, cada 
 <tr><td>Amazon e Shopee</td><td>Links de afiliados</td><td>Nada até você tocar num link. Ao tocar, você vai para o site ou app da loja, que passa a tratar seus dados pelas regras dela</td></tr>
 <tr><td>Google Maps e Waze</td><td>Botão "Como chegar"</td><td>Nada até você tocar no botão. Ao tocar, o destino é aberto no app de mapas escolhido</td></tr>
 <tr><td>Google Fonts (Google LLC, EUA)</td><td>Fontes do site kivak.app</td><td>Seu IP, ao carregar as páginas do site</td></tr>
+<tr><td>Google Analytics (Google LLC, EUA)</td><td>Medir as visitas ao site kivak.app, só se você permitir no aviso de cookies</td><td>Páginas visitadas, tempo em cada página, cliques, de onde você chegou, tipo de aparelho e navegador, cidade aproximada e um identificador aleatório guardado em cookie. Não recebe nome, e-mail nem dados da sua conta</td></tr>
+<tr><td>Microsoft Clarity (Microsoft Corporation, EUA)</td><td>Entender como as pessoas usam o site kivak.app, só se você permitir no aviso de cookies</td><td>Movimentos, cliques e rolagem na página, usados para gerar mapas de calor e gravações de navegação. O que você digita em formulários fica mascarado e não é gravado</td></tr>
 </tbody>
 </table></div>
 
@@ -210,7 +212,11 @@ Nenhum sistema é 100% seguro. Se houver um incidente de segurança que possa tr
 
 ## 14. Cookies e armazenamento no aparelho
 
-Na versão web e no painel KIVAK Business, usamos um cookie de sessão protegido para manter você conectado. No app, os dados de login ficam no armazenamento seguro do próprio celular. Não usamos cookies de publicidade nem de rastreamento. O site kivak.app não usa cookies.
+Na versão web e no painel KIVAK Business, usamos um cookie de sessão protegido para manter você conectado. No app, os dados de login ficam no armazenamento seguro do próprio celular. O app, a versão web e o KIVAK Business não usam cookies de publicidade nem de rastreamento.
+
+No site kivak.app, usamos o Google Analytics e o Microsoft Clarity para entender quais páginas são mais visitadas, quanto tempo as pessoas passam em cada uma e onde clicam. Isso nos ajuda a melhorar o site. Essas ferramentas usam cookies próprios e só são ativadas se você clicar em **Aceitar** no aviso de cookies. Se clicar em **Recusar**, nada é carregado.
+
+A sua escolha fica guardada no seu navegador. Você pode mudar de ideia a qualquer momento pelo link **Cookies**, no rodapé do site. O kivak.app não usa cookies de publicidade, e a página de ativação de conta nunca é medida.
 
 ## 15. Mudanças nesta Política
 
