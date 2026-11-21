@@ -9,7 +9,7 @@ date: 2026-10-01
 
 ## Aos 30, o piloto automático cobrou a conta
 
-Quando cheguei aos 30 anos, algo bateu muito forte em mim. Parei para olhar para trás e o que vi foi uma rotina exaustiva no piloto automático: eu acordava, trabalhava e dormia. O pouco tempo livre e o dinheiro que eu recebia escorriam por festas e baladas que, no fundo, não me deixavam legado nenhum.
+Quando cheguei aos 30 anos, algo bateu muito forte em mim. Parei para olhar para trás e o que vi foi uma rotina exaustiva no piloto automático: eu acordava, trabalhava e dormia. O pouco tempo livre e o dinheiro que eu recebia escorriam por entre os dedos sem deixar nada de pé. O problema nunca foi sair, que eu gosto e continuo gostando. Era sair no automático, sem construir nada e sem guardar nada.
 
 Faltava a sensação de construir algo verdadeiramente produtivo, que fizesse diferença para mim e para o próximo. Foi nesse momento de inquietação que um sonho antigo, que por muito tempo existiu só na minha cabeça, finalmente exigiu sair do papel.
 
@@ -47,7 +47,7 @@ Por isso eu bato o pé: **o KIVAK não vai ter inteligência artificial.** A nat
 
 ## Que vá
 
-O nome é a minha mensagem direta para você. A pronúncia certa é **"Que vá"**. É um empurrão: que vá acampar, que vá correr, que vá pedalar, que vá fazer uma trilha. O K no final está ali para dar peso à marca, mas o recado é claro: saia do sofá. Não fique parado.
+O nome é a minha mensagem direta para você. A pronúncia certa é **"Que vá"**. É um empurrão: que vá acampar, que vá correr, que vá pedalar, que vá fazer uma trilha, que vá ver aquela banda tocar, que vá encontrar a galera na mesa de sempre. O K no final está ali para dar peso à marca, mas o recado é claro: saia do sofá. Não fique parado.
 
 ## O trabalho da minha vida
 
