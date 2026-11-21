@@ -114,7 +114,7 @@ for (const f of readdirSync('conteudo/paginas').filter((f) => f.endsWith('.md'))
   const path = `/${slug}`;
   const trail = [['Início', '/'], [meta.crumb || meta.title, path]];
   const main = `<main class="page-main">
-  <header class="page-hero" style="background-image:url('${meta.image || '/assets/images/hero-trilheiro.jpg'}')">
+  <header class="page-hero" style="background-image:url('${meta.image || '/assets/images/hero-noite.jpg'}')">
     <div class="container wrap-prose">
       ${breadcrumbHtml(trail)}
       <h1>${inline(meta.h1 || meta.title)}</h1>
