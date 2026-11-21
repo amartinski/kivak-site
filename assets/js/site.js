@@ -88,13 +88,12 @@ if (form) {
       if (!res.ok) throw new Error('erro');
       window.kivakEvento?.('formulario_enviado', { tipo, plataforma: plataforma?.value || '' });
 
-      if (tipo === 'anunciante') {
-        msg.textContent = 'Recebemos seu contato! Alguém do time KIVAK te retorna em breve.';
-      } else {
-        msg.textContent = plataforma.value === 'ios'
-          ? 'Cadastrado! No iPhone, o KIVAK funciona pelo navegador: quando seu acesso for liberado, você recebe um código por e-mail pra entrar em platform.kivak.app.'
-          : 'Cadastrado! Fique de olho no seu e-mail: avisamos assim que seu acesso for liberado.';
-      }
+      // Com o cadastro de pessoa aberto (platform.kivak.app/cadastro), o
+      // único formulário que sobra é o de anunciante, em /empresas: ali o
+      // acesso ao painel Business ainda passa pelo time.
+      msg.textContent = tipo === 'anunciante'
+        ? 'Recebemos seu contato! Alguém do time KIVAK te retorna em breve.'
+        : 'Recebemos seu contato! Fique de olho no seu e-mail.';
       msg.className = 'form-msg ok';
       form.reset();
       options.forEach((o) => o.classList.remove('selected'));
